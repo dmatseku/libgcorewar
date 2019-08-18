@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-static GLfloat* create_frame_verts(float x1, float x2, float y1, float y2)
+static GLfloat* create_frame_verts(const t_vector verts)
 {
 	GLfloat *const res = (GLfloat*)malloc(sizeof(GLfloat) * 8);
 
@@ -9,14 +9,14 @@ static GLfloat* create_frame_verts(float x1, float x2, float y1, float y2)
 		exit_error("malloc error");
 		return (0);
 	}
-	res[0] = x1;
-	res[1] = y1;
-	res[2] = x1;
-	res[3] = y2;
-	res[4] = x2;
-	res[5] = y1;
-	res[6] = x2;
-	res[7] = y2;
+	res[0] = verts.x;
+	res[1] = verts.z;
+	res[2] = verts.x;
+	res[3] = verts.w;
+	res[4] = verts.y;
+	res[5] = verts.z;
+	res[6] = verts.y;
+	res[7] = verts.w;
 	return (res);
 }
 
@@ -44,7 +44,7 @@ void	create_frame_vao(t_create_frame_vao_args args)
 	GLuint*		indices;
 
 	indices = create_frame_indices();
-	verts = create_frame_verts(args.x1, args.x2, args.y1, args.y2);
+	verts = create_frame_verts(args.args);
 	glGenBuffers(1, &(args.vao->vbo));
 	glGenBuffers(1, &(args.vao->ebo));
 	glGenVertexArrays(1, &(args.vao->vao));

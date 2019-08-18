@@ -1,6 +1,18 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+void	ft_strncat(char *const str1, char const *const str2, const size_t n)
+{
+	size_t  i;
+
+	i = 0;
+	while (i < n)
+	{
+		str1[i] = str2[i];
+		i++;
+	}
+}
+
 size_t	ft_strlen(char const *const restrict str)
 {
 	size_t i;
@@ -9,6 +21,20 @@ size_t	ft_strlen(char const *const restrict str)
 	while (str[i])
 		i++;
 	return (i);
+}
+
+void	my_memset(void *const array, const int symbol, size_t size)
+{
+	char *const	str = (char *const)array;
+	while (size--)
+		str[size] = (char)symbol;
+}
+
+void	ft_bzero(void *const array, size_t size)
+{
+	char *const	str = (char *const)array;
+	while (size--)
+		str[size] = 0;
 }
 
 void	exit_error(char *const restrict str)

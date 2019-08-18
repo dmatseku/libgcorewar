@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-char	corewar_visual_init()
+char	corewar_visual_init(t_champ* champions)
 {
 	if (!glfwInit())
 		exit_error("glfw init error");
@@ -9,7 +9,7 @@ char	corewar_visual_init()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
-	g_window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "COREWAR", 0, 0);
+	g_window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "", 0, 0);
 	glfwMakeContextCurrent(g_window);
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
@@ -19,8 +19,9 @@ char	corewar_visual_init()
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glfwSetWindowPos(g_window, 50, 50);
 	glfwGetFramebufferSize(g_window, &g_w_width, &g_w_height);
 	glViewport(0, 0, g_w_width, g_w_height);
-	init_set_drawable_elems();
+	init_set_drawable_elems(champions);
 	return (1);
 }

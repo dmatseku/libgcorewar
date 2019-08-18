@@ -3,9 +3,15 @@ project(gcorewar C)
 
 set(CMAKE_C_STANDARD 99)
 
-include_directories(include ../../libglstring/includes ../../libmatrix/includes
+set(OS "linux")
+
+if (${OS} STREQUAL "linux")
+    include_directories(include  ../libmatrix/includes/ ../libglstring/includes)
+else()
+    include_directories(include ../../libglstring/includes ../../libmatrix/includes
         ../../brew/Cellar/freetype/2.10.1/include/freetype2/ ../../brew/Cellar/glew/2.1.0/include/
         ../../brew/Cellar/glfw/3.3/include/)
+endif()
 
 #add_subdirectory(../../libmatrix ./cmake-libmatrix)
 
@@ -18,4 +24,6 @@ include_directories(include ../../libglstring/includes ../../libmatrix/includes
 #link_directories(./cmake-build-debug ../../brew/Cellar/freetype/2.10.1/lib/ ../../brew/Cellar/glew/2.1.0/lib/
 #        ../../brew/Cellar/glfw/3.3/lib/)
 
-add_library(gcorewar STATIC include/libgcorewar.h init/corewar_visual_init.c other/other.c init/init_set_drawable_elems.c init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c draw/draw.c)
+add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_set_drawable_elems.c
+        init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c
+        draw/draw.c init/str_corewar/str_corewar_draw_init.c init/str_step_counter/str_step_counter_draw_init.c init/str_champions/str_champions_create.c init/str_champions/str_champions_draw_init.c init/create_pictures/create_picture_carriage.c init/rectangles_vao/create_carriage_vao.c init/rectangles_vao/create_carriage_shader_program.c init/shaders/carriage_shaders.c draw/carriage_draw.c)

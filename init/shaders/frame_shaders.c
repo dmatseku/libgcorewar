@@ -9,7 +9,7 @@ GLchar const *const	get_frame_shader_vert(void)
 	"\n"
 	"void main()\n"
 	"{\n"
-	"    gl_Position = vec4(position, 1.0f, 1.0f);\n"
+	"    gl_Position = vec4(position, 0.999999f, 1.0f);\n"
 	"}");
 }
 
@@ -22,6 +22,6 @@ GLchar const *const get_frame_shader_frag(void)
 	"\n"
 	"void main()\n"
 	"{\n"
-	"    color = vec4(0.0, 1.0, 0.0, 1.0);\n"
+	"    color = vec4(0.0, 0.2, 0.1, 1.0);\n"
 	"}");
 }
