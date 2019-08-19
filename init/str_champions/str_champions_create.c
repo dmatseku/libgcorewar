@@ -33,7 +33,7 @@ static void	create_string(size_t i, t_vector* colors, float y, char* name)
 		name = (char*)malloc(sizeof(char) * STRING_CHAMPION_MAX_LENGTH + 1);
 		if (!name)
 			exit_error("create string malloc error");
-		ft_strncat(name, tmp, STRING_CHAMPION_MAX_LENGTH - 3);
+		my_strncat(name, tmp, STRING_CHAMPION_MAX_LENGTH - 3);
 		my_memset(name + STRING_CHAMPION_MAX_LENGTH - 3, '.', 3);
 		name[STRING_CHAMPION_MAX_LENGTH] = 0;
 	}

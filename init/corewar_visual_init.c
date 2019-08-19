@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-char	corewar_visual_init(t_champ* champions)
+char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage* carriages)
 {
 	if (!glfwInit())
 		exit_error("glfw init error");
@@ -16,12 +16,12 @@ char	corewar_visual_init(t_champ* champions)
 		exit_error("glew init error");
 	if (!string_init(FONT_PATH))
 		exit_error("string init error");
-	glEnable(GL_DEPTH_TEST);
+//	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetWindowPos(g_window, 50, 50);
 	glfwGetFramebufferSize(g_window, &g_w_width, &g_w_height);
 	glViewport(0, 0, g_w_width, g_w_height);
-	init_set_drawable_elems(champions);
+	init_set_drawable_elems(champions, arena, carriages);
 	return (1);
 }

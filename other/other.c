@@ -1,7 +1,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-void	ft_strncat(char *const str1, char const *const str2, const size_t n)
+void	my_strncat(char *const str1, char const *const str2, const size_t n)
 {
 	size_t  i;
 
@@ -13,7 +13,7 @@ void	ft_strncat(char *const str1, char const *const str2, const size_t n)
 	}
 }
 
-size_t	ft_strlen(char const *const restrict str)
+size_t	my_strlen(char const *const restrict str)
 {
 	size_t i;
 
@@ -30,7 +30,7 @@ void	my_memset(void *const array, const int symbol, size_t size)
 		str[size] = (char)symbol;
 }
 
-void	ft_bzero(void *const array, size_t size)
+void	my_bzero(void *const array, size_t size)
 {
 	char *const	str = (char *const)array;
 	while (size--)
@@ -39,7 +39,7 @@ void	ft_bzero(void *const array, size_t size)
 
 void	exit_error(char *const restrict str)
 {
-	write(1, str, ft_strlen(str));
+	write(1, str, my_strlen(str));
 	write(1, "\n", 1);
 	exit(0);
 }

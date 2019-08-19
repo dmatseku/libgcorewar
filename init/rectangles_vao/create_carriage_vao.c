@@ -1,30 +1,32 @@
 #include <libgcorewar.h>
-static GLfloat* create_carriage_verts(const t_vector verts)
+static void create_carriage_verts(GLfloat *const res, size_t height, size_t width)
 {
-	GLfloat *const res = (GLfloat*)malloc(sizeof(GLfloat) * 16);
+	float x = -((float)width) / g_w_width;
+	float y = -((float)height) / g_w_height;
+	float x1 = ((float)width) / g_w_width - 2.0f / g_w_width;
+	float y1 = ((float)height) / g_w_height - 2.0f / g_w_height;
 
 	if (!res)
 	{
 		exit_error("malloc error");
-		return (0);
+		return ;
 	}
-	res[0] = verts.x;
-	res[1] = verts.z;
+	res[0] = x;
+	res[1] = y;
 	res[2] = 0.0f;
-	res[3] = 0.0f;
-	res[4] = verts.x;
-	res[5] = verts.w;
+	res[3] = 1.0f;
+	res[4] = x;
+	res[5] = y1;
 	res[6] = 0.0f;
-	res[7] = 1.0f;
-	res[8] = verts.y;
-	res[9] = verts.z;
+	res[7] = 0.0f;
+	res[8] = x1;
+	res[9] = y;
 	res[10] = 1.0f;
-	res[11] = 0.0f;
-	res[12] = verts.y;
-	res[13] = verts.w;
+	res[11] = 1.0f;
+	res[12] = x1;
+	res[13] = y1;
 	res[14] = 1.0f;
-	res[15] = 1.0f;
-	return (res);
+	res[15] = 0.0f;
 }
 
 static GLuint* create_carriage_indices(void)
@@ -49,18 +51,14 @@ void	create_carriage_vao(char i, size_t width, size_t height)
 {
 	GLfloat*	verts;
 	GLuint*		indices;
-	const float	f_width = width;
-	const float	f_height = height;
 
 
 	indices = create_carriage_indices();
-	verts = create_carriage_verts(vec4(f_width / g_w_width / -2.0f,
-			f_width / g_w_width / 2.0f - 2.0f / g_w_width,
-			f_height / g_w_height / -2.0f,
-			f_height / g_w_height / 2.0f - 2.0f / g_w_height));
+	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
+	create_carriage_verts(verts, height, width);
+	glGenVertexArrays(1, &(g_carriage_array[i].vao));
 	glGenBuffers(1, &(g_carriage_array[i].vbo));
 	glGenBuffers(1, &(g_carriage_array[i].ebo));
-	glGenVertexArrays(1, &(g_carriage_array[i].vao));
 	glBindVertexArray(g_carriage_array[i].vao);
 	glBindBuffer(GL_ARRAY_BUFFER, g_carriage_array[i].vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, verts, GL_STATIC_DRAW);
@@ -68,7 +66,7 @@ void	create_carriage_vao(char i, size_t width, size_t height)
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * GL_FLOAT));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	free(verts);

@@ -3,7 +3,7 @@
 GLchar const *const	get_carriage_shader_vert(void)
 {
 	return ((GLchar const *const)
-	"#version 450 core\n"
+	"#version 410 core\n"
 	"\n"
 	"layout (location = 0) in vec2   position;\n"
 	"\n"
@@ -23,16 +23,16 @@ GLchar const *const	get_carriage_shader_vert(void)
 GLchar const *const	get_carriage_shader_frag(void)
 {
 	return ((GLchar const *const)
-			"#version 450 core\n"
-			"\n"
-			"in  vec2            texture_coords;\n"
-			"\n"
-			"out vec4            color;\n"
-			"\n"
-			"uniform sampler2D   Texture;\n"
-			"\n"
-			"void main()\n"
-			"{\n"
-			"    color = texture(Texture, texture_coords);\n"
-			"}");
+	"#version 410 core\n"
+	"\n"
+	"in  vec2            texture_coords;\n"
+	"\n"
+	"out vec4            color;\n"
+	"\n"
+	"uniform sampler2D   Texture;\n"
+	"\n"
+	"void main()\n"
+	"{\n"
+	"    color = texture(Texture, texture_coords);\n"
+	"}");
 }
