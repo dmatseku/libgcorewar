@@ -17,34 +17,25 @@ static void	draw_frames(void)
 
 static char	call_init_funcs(char* states, double time)
 {
-	char res;
-
-	res = 0;
-	if (time > 2.0f && states[0] < 0)
+	if (states[0] < 0)
 	{
-		res = 1;
 		states[0] = str_corewar_draw_init(1, time);
+		states[1] = str_champions_draw_init(1, time);
+		states[2] = str_step_counter_draw_init(1, time);
+		states[3] = str_map_draw_init(1, time);
+		return (1);
 	}
-	else if (!states[0])
-	{
-		res = 1;
+	if (!states[0])
 		states[0] = str_corewar_draw_init(0, time);
-		if (states[0])
-			states[1] = str_champions_draw_init(1, time);
-	}
-	else if (!states[1])
-	{
-		res = 1;
+	if (!states[1])
 		states[1] = str_champions_draw_init(0, time);
-		if (states[1])
-			states[2] = str_step_counter_draw_init(1, time);
-	}
-	else if (!states[2])
-	{
-		res = 1;
+	if (!states[2])
 		states[2] = str_step_counter_draw_init(0, time);
-	}
-	return (res);
+	if (!states[3])
+		states[3] = str_map_draw_init(0, time);
+	if (!states[0] || !states[1] || !states[2] || !states[3])
+		return (1);
+	return (0);
 }
 
 void	draw_arena(void)
@@ -55,7 +46,9 @@ void	draw_arena(void)
 
 	my_memset(func_states, -1, FUNC_STATES_COUNT);
 	g_str_step_counter->active = 0;
-	tmp = 1;
+	tmp = -1;
+	string_draw();
+	glfwSetTime(0);
 	while (tmp && !glfwWindowShouldClose(g_window))
 	{
 		glClearColor(0.15f, 0.15f, 0.15f, 1.0f);
@@ -63,9 +56,13 @@ void	draw_arena(void)
 		glfwPollEvents();
 		time = glfwGetTime();
 		draw_frames();
-		tmp = call_init_funcs(func_states, time);
-		string_draw();
-		carriages_draw();
+		if (time > 0.5f)
+		{
+			tmp = call_init_funcs(func_states, time);
+			string_draw();
+			if (!tmp)
+				carriages_draw();
+		}
 		glfwSwapBuffers(g_window);
 	}
 	glfwSetTime(0);

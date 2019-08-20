@@ -9,11 +9,19 @@ static void	set_channels(unsigned char*	picture, size_t	i, t_vector color)
 	picture[i * 4 + 3] = (char)(255.0f * color.w);
 }
 
-static	unsigned char* create_picture_array(size_t width, size_t height, t_vector color)
+size_t math_length(void)
+{
+	const size_t	frame_length = (size_t)(0.3 * g_carriage_height);
+
+	g_carriage_height += (frame_length * 2);
+	g_carriage_width += (frame_length * 2);
+	return (frame_length);
+}
+
+static	unsigned char* create_picture_array(size_t width, size_t height, t_vector color, const size_t frame_length)
 {
 	unsigned char*	picture;
 	size_t	i;
-	const size_t	frame_length = (size_t)((float)width * 0.2f);
 
 	if (!(picture = (unsigned char*)malloc(sizeof(unsigned char) * width * height * 4)))
 		exit_error("create_picture malloc error");
@@ -25,8 +33,7 @@ static	unsigned char* create_picture_array(size_t width, size_t height, t_vector
 				 || i % width >= width - (frame_length - i / width)))
 			|| (i / width >= height - frame_length
 				&& (i % width < (i / width - height + frame_length)
-					|| i % width >=
-					   width - (i / width - height + frame_length))))
+					|| i % width >= width - (i / width - height + frame_length))))
 			set_channels(picture, i, color);
 		else if (i / width >= frame_length && i % width >= frame_length
 				 && i/ width < height - frame_length && i % width < width - frame_length)
@@ -38,13 +45,13 @@ static	unsigned char* create_picture_array(size_t width, size_t height, t_vector
 	return (picture);
 }
 
-GLuint	create_picture_carriege(t_vector color, size_t width, size_t height)
+GLuint	create_picture_carriege(t_vector color, size_t width, size_t height, const size_t frame_length)
 {
 	unsigned char* picture;
 	GLuint	texture;
 	float border_color[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
-	picture = create_picture_array(width, height, color);
+	picture = create_picture_array(width, height, color, frame_length);
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);

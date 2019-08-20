@@ -39,22 +39,25 @@
 #define BORDER_CENTER_HORISONTAL_Y_2 -0.6f
 
 #define STRING_COREWAR_FONTSIZE 250
-#define STRING_COREWAR_INIT_TIME 1.0
+#define STRING_COREWAR_INIT_TIME 1.0f
 
 #define STRING_STEP_FONTSIZE 100
-#define	STRING_STEP_INIT_TIME 1.5
-#define STRING_STEP_INIT_DTIME 0.3
+#define	STRING_STEP_INIT_TIME 1.5f
+#define STRING_STEP_INIT_DTIME 0.3f
 
 #define STRING_CHAMPION_SPLITSIZE 0.05f
 #define STRING_CHAMPION_FONTSIZE 90
 #define STRING_CHAMPION_MAX_LENGTH 11
-#define STRING_CHAMPION_INIT_TIME 1.6
+#define STRING_CHAMPION_INIT_TIME 1.6f
 
-#define FUNC_STATES_COUNT 3
+#define FUNC_STATES_COUNT 4
 
 #define STRING_MAP_ROW_LENGTH 75
-#define STRING_MAP_FONTSIZE 45
+#define STRING_MAP_FONTSIZE 50
+#define STRING_MAP_INIT_TIME 1.0f
 #endif
+
+#define STEP_TIME 1.0f
 
 #define MEM_SIZE 4096
 
@@ -62,9 +65,10 @@
 #include <GLFW/glfw3.h>
 #include <libmatrix.h>
 #include <libglstring.h>
+#include <lgs.h>
 #include <stdio.h>
 
-typedef struct	s_v_carriege t_v_carriege;
+typedef struct	s_v_carriage t_v_carriage;
 
 typedef struct          s_champ
 {
@@ -97,11 +101,12 @@ typedef struct          s_carriage
 	struct s_carriage   *next;
 }                       t_carriage;
 
-struct			s_v_carriege
+struct			s_v_carriage
 {
-	float*			model;
 	GLuint			picture;
-	t_vector		death_position;
+	float*			model;
+	float*			prev_model;
+	float*			death_position;
 	GLuint			vao;
 	GLuint			vbo;
 	GLuint			ebo;
@@ -126,15 +131,23 @@ unsigned char*	g_map;
 
 t_string**		g_str_map;
 
+float			g_map_opacity;
+
 t_string*		g_str_step_counter;
+
+t_string*		g_str_step;
 
 GLuint			g_frame_shader_program;
 
 GLuint			g_carriage_shader_program;
 
-t_frame_vao		g_frame_vao[FRAMES_COUNT];
+t_v_carriage*	g_carriage_array;
 
-t_v_carriege*	g_carriage_array;
+size_t			g_carriage_width;
+
+size_t			g_carriage_height;
+
+t_frame_vao		g_frame_vao[FRAMES_COUNT];
 
 GLFWwindow*		g_window;
 
@@ -173,15 +186,21 @@ char	str_step_counter_draw_init(char init, double time);
 
 char	str_champions_draw_init(char init, double time);
 
+char	str_map_draw_init(char init, double time);
+
 void	my_bzero(void* array, size_t size);
 
 void	my_memset(void* array, int symbol, size_t size);
 
-void	str_champions_create(t_champ* champions);
+char	*my_uitoa(uintmax_t n);
+
+char	*my_base(unsigned char nb);
 
 void	my_strncat(char* str1, char const * str2, size_t n);
 
-GLuint	create_picture_carriege(t_vector color, size_t width, size_t height);
+void	str_champions_create(t_champ* champions);
+
+GLuint	create_picture_carriege(t_vector color, size_t width, size_t height, size_t frame_length);
 
 void	create_carriage_vao(char i, size_t width, size_t height);
 
@@ -191,8 +210,18 @@ GLchar const *const	get_carriage_shader_vert(void);
 
 void	carriages_draw(void);
 
-char	*my_itoabase(uintmax_t nb, size_t base, size_t uplow);
-
 void	str_map_create(unsigned char const * map);
+
+void*	str_map_draw_function(t_string* string, void* param);
+
+void	update_map(unsigned char const * map);
+
+size_t math_length(void);
+
+void	corewar_visual_step(t_arena* arena, t_carriage* carriages);
+
+void	create_carriage(t_carriage* carriages);
+
+void	my_memcpy(void* src, void* dst, size_t len);
 
 #endif
