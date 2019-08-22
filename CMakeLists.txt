@@ -23,4 +23,10 @@ set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_set_drawable_elems.c
         init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c
-        draw/draw.c init/str_corewar/str_corewar_draw_init.c init/str_step_counter/str_step_counter_draw_init.c init/str_champions/str_champions_create.c init/str_champions/str_champions_draw_init.c init/create_pictures/create_picture_carriage.c init/rectangles_vao/create_carriage_vao.c init/rectangles_vao/create_carriage_shader_program.c init/shaders/carriage_shaders.c draw/carriage_draw.c init/str_map/str_map_create.c other/other_2.c init/str_map/str_map_draw_init.c init/str_map/str_map_draw_function.c step/corewar_visual_step.c step/update_map.c draw/step_draw.c step/str_step_carriage.c init/carriages/create_carriage.c step/carriage_update.c other/other_3.c)
+        draw/draw.c init/str_step_counter/str_step_counter_draw_init.c
+        init/str_champions/str_champions_create.c init/str_champions/str_champions_draw_init.c
+        init/create_pictures/create_picture_carriage.c init/rectangles_vao/create_carriage_vao.c
+        init/rectangles_vao/create_carriage_shader_program.c init/shaders/carriage_shaders.c draw/carriage_draw.c
+        init/str_map/str_map_create.c other/other_2.c init/str_map/str_map_draw_function.c step/corewar_visual_step.c
+        step/update_map.c draw/step_draw.c step/str_step_carriage.c init/carriages/create_carriage.c
+        step/carriage_update.c other/other_3.c draw/frame_draw.c init/static_string_animation_init/static_string_animation_init.c)

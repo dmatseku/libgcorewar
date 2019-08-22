@@ -15,10 +15,10 @@ static t_vector*	set_colors(void)
 {
 	t_vector *const restrict vectors = (t_vector*)malloc(sizeof(t_vector) * 4);
 
-	vectors[0] = vec4(1.0, 0.0784, 0.0784, 1.0);
-	vectors[1] = vec4(0.0, 0.0, 1.0, 1.0);
-	vectors[2] = vec4(0.0, 0.7607, 0.2156, 1.0);
-	vectors[3] = vec4(0.5, 0.5, 0.0, 1.0);
+	vectors[0] = vec4(0.850980392156863f, 0.325490196078431f, 0.309803921568627f, 1.0f);
+	vectors[1] = vec4(1.0f, 0.654901960784314f, 0.0f, 1.0f);
+	vectors[2] = vec4(0.36078431372549f, 0.72156862745098f, 0.36078431372549f, 1.0f);
+	vectors[3] = vec4(0.258823529411765f, 0.545098039215686f, 0.792156862745098f, 1.0f);
 	return (vectors);
 }
 
@@ -38,7 +38,7 @@ static void	create_string(size_t i, t_vector* colors, float y, char* name)
 		name[STRING_CHAMPION_MAX_LENGTH] = 0;
 	}
 	g_str_champions[i] = string_get_elem(string_create(name,
-		0.5f + BORDER_CENTER_VERTICAL_X / 2, y,
+		1.0f - MENU_WIDTH / 2, y,
 		STRING_CHAMPION_FONTSIZE, colors[i % 4], g_window));
 	g_str_champions[i]->active = 0;
 	if (tmp)
@@ -58,7 +58,7 @@ void	str_champions_create(t_champ* champions)
 	if (!g_str_champions || !colors)
 		exit_error("str_champions malloc error");
 	dy = (float)(STRING_CHAMPION_FONTSIZE) / g_w_height + STRING_CHAMPION_SPLITSIZE;
-	y = BORDER_CENTER_HORISONTAL_Y_1 - STRING_CHAMPION_SPLITSIZE
+	y = SPLITER_Y_2 - STRING_CHAMPION_SPLITSIZE
 			- ((float)(STRING_CHAMPION_FONTSIZE) / g_w_height / 2);
 	i = 0;
 	while (i < g_number_of_champions)

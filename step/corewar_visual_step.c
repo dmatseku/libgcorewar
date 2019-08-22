@@ -9,7 +9,9 @@ void	corewar_visual_step(t_arena* arena, t_carriage* carriages)
 	step_str = my_uitoa(step_nb);
 	if (!step_str)
 		exit_error("my_uitoa error");
-	update_map(arena->cell);
+	update_map(arena->cell, arena->owner);
 	string_update(g_str_step_counter, step_str, g_w_width, g_w_height);
-
+	free(step_str);
+	carriages_update(carriages);
+	step_draw();
 }

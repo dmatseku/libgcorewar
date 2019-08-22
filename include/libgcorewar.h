@@ -29,17 +29,22 @@
 #define FUNC_STATES_COUNT 3
 #else
 #define WINDOW_WIDTH 2400
-#define WINDOW_HEIGHT 1300
-#define FONT_PATH "../clacon.ttf"
-#define FRAMES_COUNT 7
+#define WINDOW_HEIGHT 1250
+#define FONT_PATH "../Oswald-Regular.ttf"
+#define FRAMES_COUNT 5
 
-#define BORDER_LENGTH 0.03f
-#define BORDER_CENTER_VERTICAL_X 0.7f
-#define BORDER_CENTER_HORISONTAL_Y_1 0.7f
-#define BORDER_CENTER_HORISONTAL_Y_2 -0.6f
+#define MENU_WIDTH 0.35f
+#define MENU_COLOR vec4(0.21568627451f, 0.21568627451f, 0.21568627451f, 0.0f)
 
-#define STRING_COREWAR_FONTSIZE 250
-#define STRING_COREWAR_INIT_TIME 1.0f
+#define SPLITER_HEIGHT 0.005f
+#define	SPLITER_COLOR vec4(0.28235294117f, 0.28235294117f, 0.28235294117f, 0.0f)
+
+#define SPLITER_Y_1 0.75f
+#define SPLITER_Y_2 0.5f
+#define SPLITER_Y_3 -0.6f
+#define SPLITER_Y_4 -0.85f
+
+#define STRING_COREWAR_FONTSIZE 170
 
 #define STRING_STEP_FONTSIZE 100
 #define	STRING_STEP_INIT_TIME 1.5f
@@ -50,16 +55,22 @@
 #define STRING_CHAMPION_MAX_LENGTH 11
 #define STRING_CHAMPION_INIT_TIME 1.6f
 
-#define FUNC_STATES_COUNT 4
-
 #define STRING_MAP_ROW_LENGTH 75
-#define STRING_MAP_FONTSIZE 50
-#define STRING_MAP_INIT_TIME 1.0f
+#define STRING_MAP_FONTSIZE 35
+
+#define STRING_DEAD_FONTSIZE 60
+#define STRING_DEAD_INIT_TIME 1.0f
+
+#define STRING_STATIC_INIT_TIME 1.0f
 #endif
 
 #define STEP_TIME 1.0f
 
+#define FUNC_STATES_COUNT 3
+
 #define MEM_SIZE 4096
+
+#define MAX_CARRIAGES 10
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -84,6 +95,7 @@ typedef struct          s_arena
 	int                 check;
 	int                 cydeath;
 	int                 sumlive;
+	uint_fast8_t        owner[MEM_SIZE];
 	uint_fast8_t        cell[MEM_SIZE];
 }                       t_arena;
 
@@ -103,27 +115,34 @@ typedef struct          s_carriage
 
 struct			s_v_carriage
 {
+    int				position;
+	int				prev_position;
 	GLuint			picture;
 	float*			model;
-	float*			prev_model;
-	float*			death_position;
+	float*			death_model;
+	char			alive;
+	float			x;
+	float			y;
 	GLuint			vao;
 	GLuint			vbo;
 	GLuint			ebo;
 };
 
-typedef struct	s_frame_vao
+typedef struct	s_v_frame
 {
 	GLuint		vao;
 	GLuint		vbo;
 	GLuint		ebo;
-}				t_frame_vao;
+	t_vector	color;
+}				t_v_frame;
 
 typedef struct	s_create_frame_vao_args
 {
 	t_vector		args;
-	t_frame_vao*	vao;
+	t_v_frame*		vao;
 }				t_create_frame_vao_args;
+
+t_string*		g_str_dead;
 
 t_string*		g_str_corewar;
 
@@ -147,7 +166,7 @@ size_t			g_carriage_width;
 
 size_t			g_carriage_height;
 
-t_frame_vao		g_frame_vao[FRAMES_COUNT];
+t_v_frame		g_v_frame[FRAMES_COUNT];
 
 GLFWwindow*		g_window;
 
@@ -180,13 +199,11 @@ void	draw_arena(void);
 
 char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage* carriages);
 
-char	str_corewar_draw_init(char init, double time);
-
 char	str_step_counter_draw_init(char init, double time);
 
 char	str_champions_draw_init(char init, double time);
 
-char	str_map_draw_init(char init, double time);
+char	str_static_animation_init(char init, double time);
 
 void	my_bzero(void* array, size_t size);
 
@@ -210,11 +227,13 @@ GLchar const *const	get_carriage_shader_vert(void);
 
 void	carriages_draw(void);
 
-void	str_map_create(unsigned char const * map);
+void	frames_draw(void);
+
+void	str_map_create(unsigned char const * map, unsigned char* owner);
 
 void*	str_map_draw_function(t_string* string, void* param);
 
-void	update_map(unsigned char const * map);
+void	update_map(unsigned char const * map, unsigned char const * owner);
 
 size_t math_length(void);
 
@@ -223,5 +242,11 @@ void	corewar_visual_step(t_arena* arena, t_carriage* carriages);
 void	create_carriage(t_carriage* carriages);
 
 void	my_memcpy(void* src, void* dst, size_t len);
+
+char	str_step_carriage(char init, double time);
+
+void	step_draw(void);
+
+void	carriages_update(t_carriage* carriages);
 
 #endif

@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void	update_map(unsigned char const *const map)
+void	update_map(unsigned char const *const map, unsigned char const *const owner)
 {
 	size_t i;
 	char* tmp;
@@ -16,10 +16,10 @@ void	update_map(unsigned char const *const map)
 				exit_error("itoa error");
 			if (!string_update(g_str_map[i], tmp, g_w_width, g_w_height))
 				exit_error("string_update error");
-			if (g_map[i] != 0)
-				g_str_map[i]->color = vec3(0.6f, 0.6f, 0.0f);
+			if (owner[i])
+				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 			else
-				g_str_map[i]->color = vec3(0.5f, 0.5f, 0.5f);
+				g_str_map[i]->color = vec3(1.0f, 1.0f, 1.0f);
 			free(tmp);
 		}
 		i++;

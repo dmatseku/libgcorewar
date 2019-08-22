@@ -18,10 +18,12 @@ GLchar const *const get_frame_shader_frag(void)
 	return ((GLchar const *const)
 	"#version 410 core\n"
 	"\n"
-	"out vec4    color;\n"
+	"out vec4    	color;\n"
+	"\n"
+ 	"uniform vec4	ourcolor;\n"
 	"\n"
 	"void main()\n"
 	"{\n"
-	"    color = vec4(0.0, 0.2, 0.1, 1.0);\n"
+	"    color = ourcolor;\n"
 	"}");
 }
