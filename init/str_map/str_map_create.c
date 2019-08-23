@@ -56,14 +56,10 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 	str_map_string_complement(i, x, y, d_x);
 }
 
-// vec3(0.556862745098039f, 0.556862745098039f, 0.556862745098039f)
-
 void	str_map_create(unsigned char const *const map, unsigned char *const owner)
 {
 	size_t i;
 
-
-//	size_t tmp = (MEM_SIZE + (STRING_MAP_ROW_LENGTH - (MEM_SIZE % STRING_MAP_ROW_LENGTH)));
 	g_map = (unsigned char *)malloc(sizeof(unsigned char) * MEM_SIZE);
 	if (!g_map)
 		exit_error("str_map malloc error");

@@ -1,10 +1,11 @@
 #include <libgcorewar.h>
+
 static void create_carriage_verts(GLfloat *const res, size_t height, size_t width)
 {
 	float x = -((float)width) / g_w_width;
 	float y = -((float)height) / g_w_height;
-	float x1 = ((float)width) / g_w_width - 2.0f / g_w_width;
-	float y1 = ((float)height) / g_w_height - 2.0f / g_w_height;
+	float x1 = ((float)width) / g_w_width;
+	float y1 = ((float)height) / g_w_height;
 
 	if (!res)
 	{
@@ -51,7 +52,6 @@ void	create_carriage_vao(char i, size_t width, size_t height)
 {
 	GLfloat*	verts;
 	GLuint*		indices;
-
 
 	indices = create_carriage_indices();
 	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);

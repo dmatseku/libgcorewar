@@ -47,6 +47,8 @@ void	draw_arena(void)
 		{
 			tmp = call_init_funcs(func_states, time);
 			string_draw();
+			lines_draw();
+			x_draw();
 			if (!tmp)
 				carriages_draw();
 		}

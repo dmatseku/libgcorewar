@@ -25,8 +25,11 @@ add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_s
         init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c
         draw/draw.c init/str_step_counter/str_step_counter_draw_init.c
         init/str_champions/str_champions_create.c init/str_champions/str_champions_draw_init.c
-        init/create_pictures/create_picture_carriage.c init/rectangles_vao/create_carriage_vao.c
-        init/rectangles_vao/create_carriage_shader_program.c init/shaders/carriage_shaders.c draw/carriage_draw.c
+        init/create_pictures/create_picture_carriage.c init/carriages/create_carriage_vao.c
+        init/carriages/create_carriage_shader_program.c init/shaders/carriage_shaders.c draw/carriage_draw.c
         init/str_map/str_map_create.c other/other_2.c init/str_map/str_map_draw_function.c step/corewar_visual_step.c
         step/update_map.c draw/step_draw.c step/str_step_carriage.c init/carriages/create_carriage.c
-        step/carriage_update.c other/other_3.c draw/frame_draw.c init/static_string_animation_init/static_string_animation_init.c)
+        step/carriage_update.c other/other_3.c draw/frame_draw.c
+        init/static_string_animation_init/static_string_animation_init.c init/str_xlogins/str_xlogins_create.c
+        init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/X/create_x_vao.c
+        init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c)

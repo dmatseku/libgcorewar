@@ -33,6 +33,8 @@ static void	complete_carriage(void)
 			{
 				free(g_carriage_array[i].model);
 				g_carriage_array[i].model = g_carriage_array[i].death_model;
+				string_create("XX", g_carriage_array[i].model[12], g_carriage_array[i].model[13],
+						STRING_MAP_FONTSIZE, g_str_champions[i]->color, g_window);
 			}
 		}
 		i++;

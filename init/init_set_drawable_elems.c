@@ -57,7 +57,7 @@ static void	create_spliters(void)
 void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* carriages)
 {
 	create_frame_shader_program();
-	create_carriage_shader_program();
+//	create_carriage_shader_program();
 	create_menu_field();
 	create_spliters();
 	create_strings();
@@ -67,5 +67,7 @@ void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* car
 		exit_error("set_drawable_elems malloc error");
 	str_map_create(arena->cell, arena->owner);
 	create_carriage(carriages);
+	str_xlogins_create();
+	create_x();
 	draw_arena();
 }

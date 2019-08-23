@@ -17,6 +17,8 @@ void	step_draw(void)
 		tmp = str_step_carriage(0, time);
 		string_draw();
 		carriages_draw();
+		lines_draw();
+		x_draw();
 		glfwSwapBuffers(g_window);
 	}
 	glfwSetTime(0);

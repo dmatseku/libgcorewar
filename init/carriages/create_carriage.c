@@ -22,7 +22,7 @@ void	create_carriage(t_carriage* carriages)
 	while (carriages)
 	{
 		g_carriage_array[i].picture
-				= create_picture_carriege(g_str_champions[i]->color, g_carriage_width, g_carriage_height, frame_length);
+				= create_picture_carriege(g_carriage_width, g_carriage_height, frame_length);
 		create_carriage_vao(i, g_carriage_width, g_carriage_height);
 		g_carriage_array[i].model = (float*)malloc(sizeof(float) * 16);
 		if (!g_carriage_array[i].model)
