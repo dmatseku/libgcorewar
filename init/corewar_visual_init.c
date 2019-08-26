@@ -11,6 +11,7 @@ char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage* carriag
 	glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 	g_window = glfwCreateWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "", 0, 0);
 	glfwMakeContextCurrent(g_window);
+	glfwSwapInterval(0);
 	glewExperimental = GL_TRUE;
 	if (glewInit() != GLEW_OK)
 		exit_error("glew init error");

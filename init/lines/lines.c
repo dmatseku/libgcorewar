@@ -16,13 +16,13 @@ static GLfloat* create_line_verts(const t_vector verts)
 	return (res);
 }
 
-void	create_line_vao(char index, float x, float y)
+void	create_line_vao(char index, float x, float y, int width)
 {
 	GLfloat*	verts;
 	t_vector	coords;
 
-	coords.x = ((float)-XLINE_WIDTH) / g_w_width + x;
-	coords.y = ((float)XLINE_WIDTH) / g_w_width + x;
+	coords.x = ((float)-width) / g_w_width + x;
+	coords.y = ((float)width) / g_w_width + x;
 	coords.z = y;
 	verts = create_line_verts(coords);
 	glGenBuffers(1, &(g_lines[index].vbo));

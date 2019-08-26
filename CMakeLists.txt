@@ -32,4 +32,4 @@ add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_s
         step/carriage_update.c other/other_3.c draw/frame_draw.c
         init/static_string_animation_init/static_string_animation_init.c init/str_xlogins/str_xlogins_create.c
         init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/X/create_x_vao.c
-        init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c)
+        init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c t_carriage_list/carriage_list_update.c t_carriage_list/carriage_list_add.c)

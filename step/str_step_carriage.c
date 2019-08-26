@@ -27,13 +27,15 @@ static void	complete_carriage(void)
 		{
 			g_carriage_array[i].alive = (g_carriage_array[i].position >= 0);
 			if (g_carriage_array[i].alive)
-				my_memcpy(g_carriage_array[i].model, g_str_map[g_carriage_array[i].position]->model,
-						  16 * sizeof(float));
+			{
+				g_carriage_array[i].model[12] = g_str_map[g_carriage_array[i].position]->translate[12];
+				g_carriage_array[i].model[13] = g_str_map[g_carriage_array[i].position]->translate[13] - 1.0f / g_w_height * 2;
+			}
 			else
 			{
 				free(g_carriage_array[i].model);
 				g_carriage_array[i].model = g_carriage_array[i].death_model;
-				string_create("XX", g_carriage_array[i].model[12], g_carriage_array[i].model[13],
+				string_create("XX", g_carriage_array[i].model[12], g_carriage_array[i].model[13] + 1.0f / g_w_height * 2,
 						STRING_MAP_FONTSIZE, g_str_champions[i]->color, g_window);
 			}
 		}
@@ -53,11 +55,11 @@ static void	step_carriage(double start, double time)
 			if (g_carriage_array[i].position >= 0)
 			{
 				g_carriage_array[i].model[12] = g_carriage_array[i].x +
-				   (g_str_map[g_carriage_array[i].position]->model[12]
+				   (g_str_map[g_carriage_array[i].position]->translate[12]
 					- g_carriage_array[i].x) / STEP_TIME * (time - start);
 				g_carriage_array[i].model[13] = g_carriage_array[i].y +
-				   (g_str_map[g_carriage_array[i].position]->model[13]
-					- g_carriage_array[i].y) / STEP_TIME * (time - start);
+				   (g_str_map[g_carriage_array[i].position]->translate[13]
+					- g_carriage_array[i].y) / STEP_TIME * (time - start) - 1.0f / g_w_height * 2;
 			}
 			else
 			{
@@ -66,7 +68,7 @@ static void	step_carriage(double start, double time)
 					- g_carriage_array[i].x) / STEP_TIME * (time - start);
 				g_carriage_array[i].model[13] = g_carriage_array[i].y +
 				   (g_carriage_array[i].death_model[13]
-					- g_carriage_array[i].y) / STEP_TIME * (time - start);
+					- g_carriage_array[i].y) / STEP_TIME * (time - start) - 1.0f / g_w_height * 2;
 			}
 		}
 		i++;

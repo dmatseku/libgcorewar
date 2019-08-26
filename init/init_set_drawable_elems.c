@@ -56,6 +56,7 @@ static void	create_spliters(void)
 
 void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* carriages)
 {
+	g_carriage_lst = 0;
 	create_frame_shader_program();
 //	create_carriage_shader_program();
 	create_menu_field();

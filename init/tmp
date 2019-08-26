@@ -1,6 +1,15 @@
-x - res;
-2 - height;
+MENU_WIDTH a
+STRING_CHAMPION_FONTSIZE b
+X_DISTANCE c
+res d
+g_w_width e
 
-x - (x * 0.4) = 2;
-x = 2 + x * 0.4
-x - 2 = x * 0.4
+1.0 - a / 2 - (b / 2 + c + d) / e + (b / 2 + c + d / 2) / e * 2
+1.0 - 0.5a + (0.5b + c + 0.5d) / 2e - (0.5b + c + d) / e
+(0.5b + c + 0.5d) / 2e -
+(0.5b + c + d) * 2 / 2e
+(0.5b + c + 0.5d) - (b + 2c + 2d) / 2e
+(0.5b + c + 0.5d - b - 2c - 2d) / 2e
+(-0.5b - c - 1.5d) / 2e
+
+1.0 - 0.5a + (-0.5b - c - 1.5d) / 2e

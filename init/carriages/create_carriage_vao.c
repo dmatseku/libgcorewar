@@ -48,7 +48,7 @@ static GLuint* create_carriage_indices(void)
 	return (res);
 }
 
-void	create_carriage_vao(char i, size_t width, size_t height)
+void	create_carriage_vao(size_t width, size_t height)
 {
 	GLfloat*	verts;
 	GLuint*		indices;
@@ -56,13 +56,13 @@ void	create_carriage_vao(char i, size_t width, size_t height)
 	indices = create_carriage_indices();
 	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
 	create_carriage_verts(verts, height, width);
-	glGenVertexArrays(1, &(g_carriage_array[i].vao));
-	glGenBuffers(1, &(g_carriage_array[i].vbo));
-	glGenBuffers(1, &(g_carriage_array[i].ebo));
-	glBindVertexArray(g_carriage_array[i].vao);
-	glBindBuffer(GL_ARRAY_BUFFER, g_carriage_array[i].vbo);
+	glGenVertexArrays(1, &(g_v_carriage.vao));
+	glGenBuffers(1, &(g_v_carriage.vbo));
+	glGenBuffers(1, &(g_v_carriage.ebo));
+	glBindVertexArray(g_v_carriage.vao);
+	glBindBuffer(GL_ARRAY_BUFFER, g_v_carriage.vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, verts, GL_STATIC_DRAW);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_carriage_array[i].ebo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_v_carriage.ebo);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);

@@ -44,14 +44,14 @@
 #define SPLITER_Y_3 -0.6f
 #define SPLITER_Y_4 -0.85f
 
-#define STRING_COREWAR_FONTSIZE 170
+#define STRING_COREWAR_FONTSIZE 180
 
 #define STRING_STEP_FONTSIZE 110
 #define	STRING_STEP_INIT_TIME 1.5f
 #define STRING_STEP_INIT_DTIME 0.3f
 
 #define STRING_CHAMPION_SPLITSIZE 0.08f
-#define STRING_CHAMPION_FONTSIZE 110
+#define STRING_CHAMPION_FONTSIZE 120
 #define STRING_CHAMPION_MAX_LENGTH 11
 #define STRING_CHAMPION_INIT_TIME 1.6f
 
@@ -63,9 +63,9 @@
 #define STRING_STATIC_INIT_TIME 1.0f
 
 #define XLOGINS_FONTSIZE 37
-#define XLOGINS_DISTANCE 1.0f
+#define XLOGINS_DISTANCE -2
 
-#define XLINE_WIDTH 140
+#define X_DISTANCE 10
 
 #endif
 
@@ -85,6 +85,8 @@
 #include <stdio.h>
 
 typedef struct	s_v_carriage t_v_carriage;
+
+typedef struct	s_carriage_lst t_carriage_lst;
 
 typedef struct			s_line
 {
@@ -113,8 +115,8 @@ typedef struct          s_arena
 
 typedef struct          s_carriage
 {
-	char				id;
-	char				carry;
+	unsigned int		id;
+	char				player;
 	char				alive;
 	uint_fast8_t        exec;
 	int                 cylive;
@@ -138,17 +140,30 @@ typedef struct			s_v_x
 
 struct				s_v_carriage
 {
-    int				position;
-	int				prev_position;
+//	int				position;
+//	int				prev_position;
 	GLuint			picture;
 	float*			model;
-	float*			death_model;
-	char			alive;
-	float			x;
-	float			y;
+//	float*			death_model;
+//	char			alive;
+//	float			x;
+//	float			y;
 	GLuint			vao;
 	GLuint			vbo;
 	GLuint			ebo;
+};
+
+struct					s_carriage_lst
+{
+	unsigned int		id;
+	char				player;
+	int					position;
+	int					prev_position;
+	char				alive;
+	float				x;
+	float				y;
+	t_carriage_lst*		prev;
+	t_carriage_lst*		next;
 };
 
 typedef struct	s_v_frame
@@ -164,6 +179,8 @@ typedef struct	s_create_frame_vao_args
 	t_vector		args;
 	t_v_frame*		vao;
 }				t_create_frame_vao_args;
+
+t_carriage_lst*	g_carriage_lst;
 
 t_string*		g_str_dead;
 
@@ -183,7 +200,7 @@ GLuint			g_frame_shader_program;
 
 GLuint			g_x_shader_program;
 
-t_v_carriage*	g_carriage_array;
+t_v_carriage	g_v_carriage;
 
 size_t			g_carriage_width;
 
@@ -247,11 +264,11 @@ void	my_strncat(char* str1, char const * str2, size_t n);
 
 void	str_champions_create(t_champ* champions);
 
-GLuint	create_picture_carriege(size_t width, size_t height, const size_t frame_length);
+GLuint	create_picture_carriege(size_t width, size_t height, size_t frame_length);
 
 GLuint	create_picture_x(size_t width);
 
-void	create_carriage_vao(char i, size_t width, size_t height);
+void	create_carriage_vao(size_t width, size_t height);
 
 void	create_x_vao(size_t width);
 
@@ -273,7 +290,7 @@ void	x_draw(void);
 
 void	str_map_create(unsigned char const * map, unsigned char* owner);
 
-void*	str_map_draw_function(t_string* string, void* param);
+void*	str_map_draw_function(t_string const * string, void* param);
 
 void	update_map(unsigned char const * map, unsigned char const * owner);
 
@@ -293,10 +310,12 @@ void	carriages_update(t_carriage* carriages);
 
 void	str_xlogins_create(void);
 
-void	create_line_vao(char index, float x, float y);
+void	create_line_vao(char index, float x, float y, int width);
 
 void	create_x(void);
 
-void	t_v_carriage_addend(t_v_carriage** lst, t_v_carriage* elem);
+void	carriage_list_add(t_carriage_lst** lst, t_carriage_lst* elem);
+
+void	carriage_list_update(t_carriage* carriages);
 
 #endif
