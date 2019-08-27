@@ -1,4 +1,5 @@
 #include <libgcorewar.h>
+#include <stdlib.h>
 
 static t_carriage_lst*	find_elem(unsigned int id)
 {
@@ -26,22 +27,54 @@ static void	create_elem(t_carriage* carriage)
 	carriage_list_add(&g_carriage_lst, tmp);
 }
 
-void	carriage_list_update(t_carriage* carriages)
+static void	free_carriage(t_carriage* prev, t_carriage* elem)
+{
+	prev->next = elem->next;
+	free(elem);
+}
+
+static void	free_first_carriage(t_carriage** elem)
+{
+	t_carriage* tmp;
+
+	tmp = *elem;
+	*elem = (*elem)->next;
+	free(tmp);
+}
+
+void	carriage_list_update(t_carriage** carriages)
 {
 	t_carriage_lst* tmp;
+	t_carriage*		prev_carriage;
+	t_carriage*		elem;
 
-	while (carriages)
+	prev_carriage = 0;
+	elem = *carriages;
+	while (elem)
 	{
-		tmp = find_elem(carriages->id);
+		tmp = find_elem(elem->id);
 		if (!tmp)
-			create_elem(carriages);
+			create_elem(elem);
+		else if (!elem->alive)
+		{
+			tmp->alive = 0;
+			if (!prev_carriage)
+			{
+				elem = elem->next;
+				free_first_carriage(carriages);
+				continue ;
+			}
+			else
+				free_carriage(prev_carriage, elem);
+		}
 		else
 		{
-			tmp->position = carriages->positn;
-			tmp->alive = tmp->alive;
+			tmp->prev_position = tmp->position;
+			tmp->position = elem->positn;
 			tmp->x = g_str_map[tmp->position]->translate[12];
 			tmp->y = g_str_map[tmp->position]->translate[13];
 		}
-		carriages = carriages->next;
+		prev_carriage = elem;
+		elem = elem->next;
 	}
 }

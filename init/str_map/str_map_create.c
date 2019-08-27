@@ -10,8 +10,6 @@ static void str_map_string_complement(size_t i, float x, float y, const float d_
 			 STRING_MAP_FONTSIZE,
 			 vec3(0.556862745098039f, 0.556862745098039f, 0.556862745098039f), g_window));
 		g_str_map[i]->draw_func = str_map_draw_function;
-		if (g_carriage_height < g_str_map[i]->image_height)
-			g_carriage_height = g_str_map[i]->image_height;
 		if (g_carriage_width < g_str_map[i]->image_width)
 			g_carriage_width = g_str_map[i]->image_width;
 		i++;
@@ -46,8 +44,6 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 		if (owner[i])
 			g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
-		if (g_carriage_height < g_str_map[i]->image_height)
-			g_carriage_height = g_str_map[i]->image_height;
 		if (g_carriage_width < g_str_map[i]->image_width)
 			g_carriage_width = g_str_map[i]->image_width;
 		free(tmp);
@@ -70,7 +66,6 @@ void	str_map_create(unsigned char const *const map, unsigned char *const owner)
 		i++;
 	}
 	g_carriage_width = 0;
-	g_carriage_height = 0;
 	g_str_map = (t_string**)malloc(sizeof(t_string*)
 			* (MEM_SIZE + (STRING_MAP_ROW_LENGTH - (MEM_SIZE % STRING_MAP_ROW_LENGTH))));
 	str_map_string_create((2.0f - MENU_WIDTH) / (STRING_MAP_ROW_LENGTH + 2),

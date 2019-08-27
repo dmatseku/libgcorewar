@@ -162,6 +162,8 @@ struct					s_carriage_lst
 	char				alive;
 	float				x;
 	float				y;
+	float				prev_x;
+	float				prev_y;
 	t_carriage_lst*		prev;
 	t_carriage_lst*		next;
 };
@@ -240,11 +242,11 @@ void	create_x_shader_program(void);
 
 void	create_frame_vao(t_create_frame_vao_args args);
 
-void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* carriages);
+void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage** carriages);
 
 void	draw_arena(void);
 
-char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage* carriages);
+char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage** carriages);
 
 char	str_step_counter_draw_init(char init, double time);
 
@@ -296,17 +298,15 @@ void	update_map(unsigned char const * map, unsigned char const * owner);
 
 size_t	math_length(void);
 
-void	corewar_visual_step(t_arena* arena, t_carriage* carriages);
+void	corewar_visual_step(t_arena* arena, t_carriage** carriages);
 
-void	create_carriage(t_carriage* carriages);
+void	create_carriage(/*t_carriage* carriages*/);
 
 void	my_memcpy(void* src, void* dst, size_t len);
 
 char	str_step_carriage(char init, double time);
 
 void	step_draw(void);
-
-void	carriages_update(t_carriage* carriages);
 
 void	str_xlogins_create(void);
 
@@ -316,6 +316,8 @@ void	create_x(void);
 
 void	carriage_list_add(t_carriage_lst** lst, t_carriage_lst* elem);
 
-void	carriage_list_update(t_carriage* carriages);
+void	carriage_list_del(t_carriage_lst** lst, t_carriage_lst* elem);
+
+void	carriage_list_update(t_carriage** carriages);
 
 #endif

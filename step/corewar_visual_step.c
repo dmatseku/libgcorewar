@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void	corewar_visual_step(t_arena* arena, t_carriage* carriages)
+void	corewar_visual_step(t_arena* arena, t_carriage** carriages)
 {
 	static uintmax_t	step_nb = 0;
 	char*				step_str;
@@ -12,6 +12,6 @@ void	corewar_visual_step(t_arena* arena, t_carriage* carriages)
 	update_map(arena->cell, arena->owner);
 	string_update(g_str_step_counter, step_str, g_w_width, g_w_height);
 	free(step_str);
-	carriages_update(carriages);
+	carriage_list_update(carriages);
 	step_draw();
 }

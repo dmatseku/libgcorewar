@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage* carriages)
+char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage** carriages)
 {
 	if (!glfwInit())
 		exit_error("glfw init error");

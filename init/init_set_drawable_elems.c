@@ -54,7 +54,7 @@ static void	create_spliters(void)
 	g_v_frame[4].color = SPLITER_COLOR;
 }
 
-void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* carriages)
+void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage** carriages)
 {
 	g_carriage_lst = 0;
 	create_frame_shader_program();
@@ -63,11 +63,12 @@ void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage* car
 	create_spliters();
 	create_strings();
 	str_champions_create(champions);
-	g_carriage_array = (t_v_carriage*)malloc(sizeof(t_v_carriage) * g_number_of_champions);
-	if (!g_carriage_array)
-		exit_error("set_drawable_elems malloc error");
+//	g_carriage_array = (t_v_carriage*)malloc(sizeof(t_v_carriage) * g_number_of_champions);
+//	if (!g_carriage_array)
+//		exit_error("set_drawable_elems malloc error");
 	str_map_create(arena->cell, arena->owner);
-	create_carriage(carriages);
+	create_carriage(/*carriages*/);
+	carriage_list_update(carriages);
 	str_xlogins_create();
 	create_x();
 	draw_arena();
