@@ -5,7 +5,8 @@ void	carriage_list_del(t_carriage_lst** lst, t_carriage_lst* elem)
 	if (*lst == elem)
 	{
 		*lst = (*lst)->next;
-		(*lst)->prev = 0;
+		if (*lst)
+			(*lst)->prev = 0;
 		free(elem);
 		return ;
 	}

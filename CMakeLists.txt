@@ -3,10 +3,10 @@ project(gcorewar C)
 
 set(CMAKE_C_STANDARD 99)
 
-    include_directories(include  ../libmatrix/includes/ ../libglstring/includes)
-#    include_directories(include ../../libglstring/includes ../../libmatrix/includes
-#        ../../brew/Cellar/freetype/2.10.1/include/freetype2/ ../../brew/Cellar/glew/2.1.0/include/
-#        ../../brew/Cellar/glfw/3.3/include/)
+#    include_directories(include  ../libmatrix/includes/ ../libglstring/includes)
+    include_directories(include ../../libglstring/includes ../../libmatrix/includes
+        ../../brew/Cellar/freetype/2.10.1/include/freetype2/ ../../brew/Cellar/glew/2.1.0/include/
+        ../../brew/Cellar/glfw/3.3/include/)
 
 #add_subdirectory(../../libmatrix ./cmake-libmatrix)
 

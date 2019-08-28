@@ -38,7 +38,7 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 			if (i > 0)
 				y -= d_y;
 		}
-		g_str_map[i] = string_get_elem(string_create(tmp, x,
+		g_str_map[i] = string_get_elem(string_create_nospace(tmp, x,
 			 y,
 			 STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
 		if (owner[i])
