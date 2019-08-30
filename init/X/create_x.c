@@ -28,6 +28,9 @@ void	create_x(void)
 	create_x_vao(STRING_CHAMPION_FONTSIZE * 0.5);
 	g_x.model = matrix->mat;
 	g_x.draw = 0;
+	g_x.init = 1;
 	g_x.color = g_str_champions[0]->color;
+	g_x.color.w = 0;
+	g_x.position = 1;
 	free(matrix);
 }

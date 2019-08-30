@@ -18,7 +18,7 @@ static void	create_strings(void)
 			1.0f - MENU_WIDTH / 2,
 			SPLITER_Y_1 - d_y,
 	STRING_STEP_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
-	g_str_dead = string_get_elem(string_create("DEAD CARRIAGES:",
+	g_str_dead = string_get_elem(string_create("LIVE CARRIAGES:",
 		1.0f - MENU_WIDTH / 2,
 		SPLITER_Y_3 - (SPLITER_Y_3 - SPLITER_Y_4 - SPLITER_HEIGHT) / 3,
 		STRING_DEAD_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
@@ -58,18 +58,18 @@ void	init_set_drawable_elems(t_champ* champions, t_arena* arena, t_carriage** ca
 {
 	g_carriage_lst = 0;
 	create_frame_shader_program();
-//	create_carriage_shader_program();
 	create_menu_field();
 	create_spliters();
 	create_strings();
 	str_champions_create(champions);
-//	g_carriage_array = (t_v_carriage*)malloc(sizeof(t_v_carriage) * g_number_of_champions);
-//	if (!g_carriage_array)
-//		exit_error("set_drawable_elems malloc error");
 	str_map_create(arena->cell, arena->owner);
-	create_carriage(/*carriages*/);
+	create_carriage();
+	g_counts = (unsigned int*)malloc(sizeof(unsigned int) * g_number_of_champions);
+	g_lines = (t_line*)malloc(sizeof(t_line) * (4 + g_number_of_champions));
+	my_memset(g_counts, 0, sizeof(unsigned int) * g_number_of_champions);
 	carriage_list_update(carriages);
 	str_xlogins_create();
 	create_x();
+	str_counters_create();
 	draw_arena();
 }

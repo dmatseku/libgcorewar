@@ -5,7 +5,7 @@ void	lines_draw(void)
 	char i;
 
 	i = 0;
-	while (i < 4)
+	while (i < 4 + g_number_of_champions)
 	{
 		glUseProgram(g_frame_shader_program);
 		glBindVertexArray(g_lines[i].vao);

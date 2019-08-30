@@ -5,7 +5,7 @@ static void str_map_string_complement(size_t i, float x, float y, const float d_
 	while (i % STRING_MAP_ROW_LENGTH)
 	{
 		x += d_x;
-		g_str_map[i] = string_get_elem(string_create("XX", x,
+		g_str_map[i] = string_get_elem(string_create_nospace("XX", x,
 			 y,
 			 STRING_MAP_FONTSIZE,
 			 vec3(0.556862745098039f, 0.556862745098039f, 0.556862745098039f), g_window));

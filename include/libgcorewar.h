@@ -60,12 +60,18 @@
 
 #define STRING_DEAD_FONTSIZE 60
 
+#define STRING_COUNTERS_FONTSIZE 40
+
+#define COUNTER_LINES_DISTANCE 10
+#define COUNTER_LINES_WIDTH 100
+
 #define STRING_STATIC_INIT_TIME 1.0f
 
 #define XLOGINS_FONTSIZE 37
 #define XLOGINS_DISTANCE -2
 
 #define X_DISTANCE 10
+#define X_SHOW_TIME 0.3f
 
 #endif
 
@@ -104,14 +110,18 @@ typedef struct          s_champ
 	uint_fast8_t        *exec;
 	struct s_champ      *next;
 }                       t_champ;
-typedef struct          s_arena
+
+typedef struct		s_arena
 {
-	int                 check;
-	int                 cydeath;
-	int                 sumlive;
-	uint_fast8_t        owner[MEM_SIZE];
-	uint_fast8_t        cell[MEM_SIZE];
-}                       t_arena;
+	unsigned int    iter;
+	unsigned int    check;
+	int     		cydeath;
+	unsigned int    sumlive;
+	char    		lastlive;
+	unsigned int    survived;
+	uint_fast8_t	owner[MEM_SIZE];
+	uint_fast8_t	cell[MEM_SIZE];
+}					t_arena;
 
 typedef struct          s_carriage
 {
@@ -135,19 +145,15 @@ typedef struct			s_v_x
 	GLuint				ebo;
 	GLuint				picture;
 	char				draw;
+	char				init;
+	char				position;
 	t_vector			color;
 }						t_v_x;
 
 struct				s_v_carriage
 {
-//	int				position;
-//	int				prev_position;
 	GLuint			picture;
 	float*			model;
-//	float*			death_model;
-//	char			alive;
-//	float			x;
-//	float			y;
 	GLuint			vao;
 	GLuint			vbo;
 	GLuint			ebo;
@@ -220,11 +226,15 @@ char			g_number_of_champions;
 
 t_string**		g_str_champions;
 
-t_line			g_lines[4];
+t_line*			g_lines;
 
 t_string*		g_str_xlogins[4];
 
 t_v_x			g_x;
+
+unsigned int*	g_counts;
+
+t_string**		g_counters;
 
 size_t	my_strlen(char const * str);
 
@@ -235,8 +245,6 @@ GLchar const *const	get_frame_shader_vert(void);
 GLchar const *const get_frame_shader_frag(void);
 
 void	create_frame_shader_program(void);
-
-void	create_carriage_shader_program(void);
 
 void	create_x_shader_program(void);
 
@@ -274,9 +282,9 @@ void	create_carriage_vao(size_t width, size_t height);
 
 void	create_x_vao(size_t width);
 
-GLchar const *const	get_carriage_shader_frag(void);
-
 GLchar const *const	get_carriage_shader_vert(void);
+
+GLchar const *const	get_carriage_shader_frag(void);
 
 GLchar const *const	get_x_shader_vert(void);
 
@@ -306,7 +314,7 @@ void	my_memcpy(void* src, void* dst, size_t len);
 
 char	str_step_carriage(char init, double time);
 
-void	step_draw(void);
+void	step_draw(char new_position);
 
 void	str_xlogins_create(void);
 
@@ -319,5 +327,9 @@ void	carriage_list_add(t_carriage_lst** lst, t_carriage_lst* elem);
 void	carriage_list_del(t_carriage_lst** lst, t_carriage_lst* elem);
 
 void	carriage_list_update(t_carriage** carriages);
+
+void	str_counters_create(void);
+
+char	x_step(double time, char init, char new_position);
 
 #endif

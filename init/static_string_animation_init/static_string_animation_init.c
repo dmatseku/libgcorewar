@@ -3,7 +3,9 @@
 char	str_static_animation_init(char init, double time)
 {
 	static	double		start;
+	char i;
 
+	i = -1;
 	if (init)
 	{
 		start = time;
@@ -29,10 +31,8 @@ char	str_static_animation_init(char init, double time)
 		g_str_xlogins[1]->color.w = 1.0f;
 		g_str_xlogins[2]->color.w = 1.0f;
 		g_str_xlogins[3]->color.w = 1.0f;
-		g_lines[0].color.w = g_map_opacity;
-		g_lines[1].color.w = g_map_opacity;
-		g_lines[2].color.w = g_map_opacity;
-		g_lines[3].color.w = g_map_opacity;
+		while (++i < 4 + g_number_of_champions)
+			g_lines[i].color.w = g_map_opacity;
 		g_str_corewar->color.w = 1.0f;
 		g_str_dead->color.w = 1.0f;
 		g_map_opacity = 1.0f;
@@ -48,10 +48,8 @@ char	str_static_animation_init(char init, double time)
 	g_str_xlogins[1]->color.w = g_map_opacity;
 	g_str_xlogins[2]->color.w = g_map_opacity;
 	g_str_xlogins[3]->color.w = g_map_opacity;
-	g_lines[0].color.w = g_map_opacity;
-	g_lines[1].color.w = g_map_opacity;
-	g_lines[2].color.w = g_map_opacity;
-	g_lines[3].color.w = g_map_opacity;
+	while (++i < 4 + g_number_of_champions)
+		g_lines[i].color.w = g_map_opacity;
 	g_str_corewar->color.w = g_map_opacity;
 	g_str_dead->color.w = g_map_opacity;
 	return (0);

@@ -25,19 +25,8 @@ static void	complete_carriage(void)
 	{
 		if (elem->alive && elem->prev_position != elem->position)
 		{
-//			g_carriage_array[i].alive = (g_carriage_array[i].position >= 0);
-//			if (g_carriage_array[i].alive)
-//			{
 			elem->x = g_str_map[elem->position]->translate[12];
 			elem->y = g_str_map[elem->position]->translate[13];
-//			}
-//			else
-//			{
-//				free(g_carriage_array[i].model);
-//				g_carriage_array[i].model = g_carriage_array[i].death_model;
-//				string_create("XX", g_carriage_array[i].model[12], g_carriage_array[i].model[13],
-//						STRING_MAP_FONTSIZE, g_str_champions[i]->color, g_window);
-//			}
 		}
 		else if (!elem->alive)
 			carriage_list_del(&g_carriage_lst, elem);
@@ -54,12 +43,12 @@ static void	step_carriage(double start, double time)
 	{
 		if (elem->alive && elem->prev_position != elem->position)
 		{
-			elem->x = elem->prev_x +
-			   (g_str_map[elem->position]->translate[12]
-				- elem->prev_x) / STEP_TIME * (time - start);
-			elem->y = elem->prev_y +
-			   (g_str_map[elem->position]->translate[13]
-				- elem->prev_y) / STEP_TIME * (time - start);
+			elem->x = g_str_map[elem->prev_position]->translate[12]
+					+ ((g_str_map[elem->position]->translate[12]
+					- g_str_map[elem->prev_position]->translate[12]) / STEP_TIME * (time - start));
+			elem->y = g_str_map[elem->prev_position]->translate[13]
+					+ ((g_str_map[elem->position]->translate[13]
+					- g_str_map[elem->prev_position]->translate[13]) / STEP_TIME * (time - start));
 		}
 		elem = elem->next;
 	}

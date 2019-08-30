@@ -24,6 +24,7 @@ static void	create_elem(t_carriage* carriage)
 	tmp->prev_position = carriage->positn;
 	tmp->x = g_str_map[tmp->position]->translate[12];
 	tmp->y = g_str_map[tmp->position]->translate[13];
+	g_counts[tmp->player - 1]++;
 	carriage_list_add(&g_carriage_lst, tmp);
 }
 
@@ -66,6 +67,7 @@ void	carriage_list_update(t_carriage** carriages)
 			}
 			else
 				free_carriage(prev_carriage, elem);
+			g_counts[tmp->player - 1]--;
 		}
 		else
 		{
