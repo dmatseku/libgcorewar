@@ -75,7 +75,7 @@
 
 #endif
 
-#define STEP_TIME 1.0f
+#define STEP_TIME 0.5f
 
 #define FUNC_STATES_COUNT 3
 

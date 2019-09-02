@@ -37,7 +37,7 @@ static void	create_string(size_t i, t_vector* colors, float y, char* name)
 		my_memset(name + STRING_CHAMPION_MAX_LENGTH - 3, '.', 3);
 		name[STRING_CHAMPION_MAX_LENGTH] = 0;
 	}
-	g_str_champions[i] = string_get_elem(string_create(name,
+	g_str_champions[i] = string_get_elem(string_create_nospace(name,
 		1.0f - MENU_WIDTH / 2, y,
 		STRING_CHAMPION_FONTSIZE, colors[i % 4], g_window));
 	g_str_champions[i]->active = 0;
