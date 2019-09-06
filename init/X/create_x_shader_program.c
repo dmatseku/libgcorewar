@@ -5,10 +5,9 @@ static GLuint	create_x_shader_vertex(void)
 {
 	char				log[512];
 	GLint				success;
-	GLuint				vshader;
+	const GLuint		vshader = glCreateShader(GL_VERTEX_SHADER);
 	GLchar const *const	v_shader_str = get_x_shader_vert();
 
-	vshader = glCreateShader(GL_VERTEX_SHADER);
 	glShaderSource(vshader, 1, &v_shader_str , 0);
 	glCompileShader(vshader);
 	glGetShaderiv(vshader, GL_COMPILE_STATUS, &success);
@@ -24,10 +23,9 @@ static GLuint	create_x_shader_fragment(void)
 {
 	char				log[512];
 	GLint				success;
-	GLuint				fshader;
+	const GLuint		fshader = glCreateShader(GL_FRAGMENT_SHADER);
 	GLchar const *const	f_shader_str = get_x_shader_frag();
 
-	fshader = glCreateShader(GL_FRAGMENT_SHADER);
 	glShaderSource(fshader, 1, &f_shader_str, 0);
 	glCompileShader(fshader);
 	glGetShaderiv(fshader, GL_COMPILE_STATUS, &success);

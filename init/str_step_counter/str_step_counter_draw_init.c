@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-char	str_step_counter_draw_init(char init, double time)
+char	str_step_counter_draw_init(const char init, const double time)
 {
 	static double start;
 

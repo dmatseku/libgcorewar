@@ -18,7 +18,7 @@ static size_t	get_max_width(void)
 
 void	create_x(void)
 {
-	t_matrix*	matrix;
+	t_matrix const *restrict	matrix;
 
 	create_x_shader_program();
 	matrix = m_translate_new(vec4(1.0f - MENU_WIDTH / 2
@@ -32,5 +32,5 @@ void	create_x(void)
 	g_x.color = g_str_champions[0]->color;
 	g_x.color.w = 0;
 	g_x.position = 1;
-	free(matrix);
+	free((void*)matrix);
 }

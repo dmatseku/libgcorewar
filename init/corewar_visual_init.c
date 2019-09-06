@@ -1,7 +1,20 @@
 #include <libgcorewar.h>
 
-char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage** carriages)
+char	corewar_visual_init(t_champ const *const restrict champions,
+							t_arena const *const restrict arena,
+							t_carriage const * *const restrict carriages, const char hidden)
 {
+	g_hidden = hidden;
+	if (!hidden)
+	{
+		g_update_map = update_map;
+		g_carriages_draw = carriages_draw;
+	}
+	else
+	{
+		g_update_map = non_update_map;
+		g_carriages_draw = non_carriages_draw;
+	}
 	if (!glfwInit())
 		exit_error("glfw init error");
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -17,7 +30,6 @@ char	corewar_visual_init(t_champ* champions, t_arena* arena, t_carriage** carria
 		exit_error("glew init error");
 	if (!string_init(FONT_PATH))
 		exit_error("string init error");
-//	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glfwSetWindowPos(g_window, 50, 50);

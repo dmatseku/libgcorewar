@@ -2,10 +2,11 @@
 
 static void	set_y_coord(void)
 {
-	const float y = -1.0f - (-1.0f - SPLITER_Y_4) / 2
-					+ (float)(g_str_xlogins[0]->image_height + XLOGINS_DISTANCE + 1) / g_w_height
-					- 0.5f * g_str_xlogins[0]->image_height / g_w_height * 2;
+	float y;
 
+	y = -1.0f - (-1.0f - SPLITER_Y_4) / 2
+		+ (float)(g_str_xlogins[0]->image_height + XLOGINS_DISTANCE + 1) / g_w_height
+		- 0.5f * g_str_xlogins[0]->image_height / g_w_height * 2;
 	g_str_xlogins[0]->translate[13] = y;
 	g_str_xlogins[1]->translate[13] = y;
 	g_str_xlogins[2]->translate[13] = y;
@@ -15,10 +16,11 @@ static void	set_y_coord(void)
 static void set_lines(void)
 {
 	const float	d_x = MENU_WIDTH / 5;
-	const float y1 = -1.0f - (-1.0f - SPLITER_Y_4) / 2
-					+ (float)(g_str_xlogins[0]->image_height + XLOGINS_DISTANCE + 1) / g_w_height
-					- (0.5f + XLOGINS_DISTANCE + g_str_xlogins[0]->image_height) / g_w_height * 2;
+	float		y1;
 
+	y1 = -1.0f - (-1.0f - SPLITER_Y_4) / 2
+		 + (float)(g_str_xlogins[0]->image_height + XLOGINS_DISTANCE + 1) / g_w_height
+		 - (0.5f + XLOGINS_DISTANCE + g_str_xlogins[0]->image_height) / g_w_height * 2;
 	create_line_vao(0, 1.0f - MENU_WIDTH + d_x, y1, g_str_xlogins[0]->image_width + 20);
 	g_lines[0].color = vec4(0.850980392156863f, 0.325490196078431f, 0.309803921568627f, 0.0f);
 	create_line_vao(1, 1.0f - MENU_WIDTH + d_x * 2, y1, g_str_xlogins[1]->image_width + 20);

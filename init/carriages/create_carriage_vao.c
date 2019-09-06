@@ -1,17 +1,14 @@
 #include <libgcorewar.h>
 
-static void create_carriage_verts(GLfloat *const res, size_t height, size_t width)
+static void create_carriage_verts(GLfloat *const restrict res, const size_t height, const size_t width)
 {
-	float x = -((float)width) / g_w_width;
-	float y = -((float)height) / g_w_height;
-	float x1 = ((float)width) / g_w_width;
-	float y1 = ((float)height) / g_w_height;
+	const float x = -((float)width) / g_w_width;
+	const float y = -((float)height) / g_w_height;
+	const float x1 = ((float)width) / g_w_width;
+	const float y1 = ((float)height) / g_w_height;
 
 	if (!res)
-	{
 		exit_error("malloc error");
-		return ;
-	}
 	res[0] = x;
 	res[1] = y;
 	res[2] = 0.0f;
@@ -32,7 +29,7 @@ static void create_carriage_verts(GLfloat *const res, size_t height, size_t widt
 
 static GLuint* create_carriage_indices(void)
 {
-	GLuint *const res = (GLuint*)malloc(sizeof(GLuint) * 6);
+	GLuint *const restrict res = (GLuint*)malloc(sizeof(GLuint) * 6);
 
 	if (!res)
 	{
@@ -48,13 +45,11 @@ static GLuint* create_carriage_indices(void)
 	return (res);
 }
 
-void	create_carriage_vao(size_t width, size_t height)
+void	create_carriage_vao(const size_t width, const size_t height)
 {
-	GLfloat*	verts;
-	GLuint*		indices;
+	GLfloat *const restrict			verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
+	GLuint const *const restrict	indices = create_carriage_indices();
 
-	indices = create_carriage_indices();
-	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
 	create_carriage_verts(verts, height, width);
 	glGenVertexArrays(1, &(g_v_carriage.vao));
 	glGenBuffers(1, &(g_v_carriage.vbo));
@@ -70,6 +65,6 @@ void	create_carriage_vao(size_t width, size_t height)
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	free(verts);
-	free(indices);
+	free((void*)indices);
 }
 

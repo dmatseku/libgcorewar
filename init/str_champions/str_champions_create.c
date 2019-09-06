@@ -1,7 +1,7 @@
 #include <libgcorewar.h>
 
 
-static void champ_length(t_champ* champions)
+static void champ_length(t_champ const *restrict champions)
 {
 	g_number_of_champions = 0;
 	while (champions)
@@ -22,9 +22,10 @@ static t_vector*	set_colors(void)
 	return (vectors);
 }
 
-static void	create_string(size_t i, t_vector* colors, float y, char* name)
+static void	create_string(const size_t i, t_vector const *const restrict colors,
+									const float y, char* name)
 {
-	char*	tmp;
+	char const *	tmp;
 
 	tmp = 0;
 	if (ft_strlen(name) > STRING_CHAMPION_MAX_LENGTH)
@@ -45,21 +46,20 @@ static void	create_string(size_t i, t_vector* colors, float y, char* name)
 		free(name);
 }
 
-void	str_champions_create(t_champ* champions)
+void	str_champions_create(t_champ const *restrict champions)
 {
-	size_t		i;
-	float		dy;
-	float		y;
-	t_vector*	colors;
+	size_t							i;
+	t_vector const *const restrict	colors = set_colors();
+	float							dy;
+	float							y;
 
-	champ_length(champions);
-	g_str_champions = (t_string**)malloc(sizeof(t_string*) * g_number_of_champions);
-	colors = set_colors();
-	if (!g_str_champions || !colors)
-		exit_error("str_champions malloc error");
 	dy = (float)(STRING_CHAMPION_FONTSIZE) / g_w_height + STRING_CHAMPION_SPLITSIZE;
 	y = SPLITER_Y_2 - STRING_CHAMPION_SPLITSIZE
-			- ((float)(STRING_CHAMPION_FONTSIZE) / g_w_height / 2);
+		- ((float)(STRING_CHAMPION_FONTSIZE) / g_w_height / 2);
+	champ_length(champions);
+	g_str_champions = (t_string**)malloc(sizeof(t_string*) * g_number_of_champions);
+	if (!g_str_champions || !colors)
+		exit_error("str_champions malloc error");
 	i = 0;
 	while (i < g_number_of_champions)
 	{
@@ -68,5 +68,5 @@ void	str_champions_create(t_champ* champions)
 		y -= dy;
 		i++;
 	}
-	free(colors);
+	free((void*)colors);
 }

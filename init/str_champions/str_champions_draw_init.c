@@ -12,7 +12,7 @@ static void	set_active(void)
 	}
 }
 
-static void step_champions(char* nb, double time, double start)
+static void step_champions(char *const restrict nb, const double time, const double start)
 {
 	char			dnb;
 
@@ -25,7 +25,7 @@ static void step_champions(char* nb, double time, double start)
 	}
 }
 
-char	str_champions_draw_init(char init, double time)
+char	str_champions_draw_init(const char init, const double time)
 {
 	static double	start;
 	static char		nb;

@@ -9,9 +9,9 @@ size_t math_length(void)
 	return (frame_length);
 }
 
-static	unsigned char* create_picture_array(size_t width, size_t height, const size_t frame_length)
+static	unsigned char* create_picture_array(const size_t width, const size_t height, const size_t frame_length)
 {
-	unsigned char*	picture;
+	unsigned char *restrict	picture;
 	size_t	i;
 	size_t	j;
 
@@ -33,11 +33,11 @@ static	unsigned char* create_picture_array(size_t width, size_t height, const si
 	return (picture);
 }
 
-GLuint	create_picture_carriege(size_t width, size_t height, const size_t frame_length)
+GLuint	create_picture_carriege(const size_t width, const size_t height, const size_t frame_length)
 {
-	unsigned char* picture;
-	GLuint	texture;
-	float border_color[] = { 0.0f, 0.0f, 0.0f, 0.0f };
+	unsigned char const	*restrict	picture;
+	GLuint							texture;
+	float const						border_color[] = { 0.0f, 0.0f, 0.0f, 0.0f };
 
 	picture = create_picture_array(width, height, frame_length);
 	glGenTextures(1, &texture);
@@ -49,7 +49,7 @@ GLuint	create_picture_carriege(size_t width, size_t height, const size_t frame_l
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, picture);
 	glGenerateMipmap(GL_TEXTURE_2D);
-	free(picture);
+	free((void*)picture);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	return (texture);
 }

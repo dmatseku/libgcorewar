@@ -2,7 +2,7 @@
 
 static GLfloat* create_frame_verts(const t_vector verts)
 {
-	GLfloat *const res = (GLfloat*)malloc(sizeof(GLfloat) * 8);
+	GLfloat *const restrict res = (GLfloat*)malloc(sizeof(GLfloat) * 8);
 
 	if (!res)
 	{
@@ -22,7 +22,7 @@ static GLfloat* create_frame_verts(const t_vector verts)
 
 static GLuint* create_frame_indices(void)
 {
-	GLuint *const res = (GLuint*)malloc(sizeof(GLuint) * 6);
+	GLuint *const restrict res = (GLuint*)malloc(sizeof(GLuint) * 6);
 
 	if (!res)
 	{
@@ -38,13 +38,11 @@ static GLuint* create_frame_indices(void)
 	return (res);
 }
 
-void	create_frame_vao(t_create_frame_vao_args args)
+void	create_frame_vao(const t_create_frame_vao_args args)
 {
-	GLfloat*	verts;
-	GLuint*		indices;
+	GLfloat const *const restrict	verts = create_frame_verts(args.args);
+	GLuint const *const restrict	indices = create_frame_indices();
 
-	indices = create_frame_indices();
-	verts = create_frame_verts(args.args);
 	glGenBuffers(1, &(args.vao->vbo));
 	glGenBuffers(1, &(args.vao->ebo));
 	glGenVertexArrays(1, &(args.vao->vao));
@@ -56,7 +54,7 @@ void	create_frame_vao(t_create_frame_vao_args args)
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
-	free(verts);
-	free(indices);
+	free((void*)verts);
+	free((void*)indices);
 }
 

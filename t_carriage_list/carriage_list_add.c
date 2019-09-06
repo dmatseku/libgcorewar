@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void	carriage_list_add(t_carriage_lst** lst, t_carriage_lst* elem)
+void	carriage_list_add(t_carriage_lst* *const restrict lst, t_carriage_lst *const elem)
 {
 	t_carriage_lst* tmp;
 

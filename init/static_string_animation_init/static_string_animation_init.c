@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-char	str_static_animation_init(char init, double time)
+char	str_static_animation_init(const char init, const double time)
 {
 	static	double		start;
 	char i;

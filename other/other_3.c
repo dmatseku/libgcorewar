@@ -1,12 +1,10 @@
 #include <libgcorewar.h>
 
-void	my_memcpy(void* src, void* dst, size_t len)
+void	my_memcpy(void *const src, void const *const dst, size_t len)
 {
-	char* a;
-	char* b;
+	char *const			a = (char*)src;
+	char const *const	b = (char*)dst;
 
-	a = (char*)src;
-	b = (char*)dst;
 	while (len--)
 		a[len] = b[len];
 }

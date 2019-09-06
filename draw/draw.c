@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-static char	call_init_funcs(char* states, double time)
+static char	call_init_funcs(char *const restrict states, const double time)
 {
 	if (states[0] < 0)
 	{
@@ -49,7 +49,7 @@ void	draw_arena(void)
 			string_draw();
 			lines_draw();
 			x_draw();
-			if (!tmp)
+			if (!tmp && !g_hidden)
 				carriages_draw();
 		}
 		glfwSwapBuffers(g_window);

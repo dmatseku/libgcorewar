@@ -1,7 +1,7 @@
 #include <libgcorewar.h>
 #include <stdlib.h>
 
-static t_carriage_lst*	find_elem(unsigned int id)
+static t_carriage_lst*	find_elem(const unsigned int id)
 {
 	t_carriage_lst* tmp;
 
@@ -11,10 +11,11 @@ static t_carriage_lst*	find_elem(unsigned int id)
 	return (tmp);
 }
 
-static void	create_elem(t_carriage* carriage)
+static void	create_elem(t_carriage const *const restrict carriage)
 {
-	t_carriage_lst *const tmp = (t_carriage_lst*)malloc(sizeof(t_carriage_lst));
+	t_carriage_lst* tmp;
 
+	tmp = (t_carriage_lst*)malloc(sizeof(t_carriage_lst));
 	if (!tmp)
 		exit_error("malloc error");
 	tmp->id = carriage->id;
@@ -28,29 +29,28 @@ static void	create_elem(t_carriage* carriage)
 	carriage_list_add(&g_carriage_lst, tmp);
 }
 
-static void	free_carriage(t_carriage* prev, t_carriage* elem)
+static void	free_carriage(t_carriage *const restrict prev, t_carriage const *const restrict elem)
 {
 	prev->next = elem->next;
-	free(elem);
+	free((void*)elem);
 }
 
-static void	free_first_carriage(t_carriage** elem)
+static void	free_first_carriage(t_carriage const * *restrict elem)
 {
-	t_carriage* tmp;
+	t_carriage const *const tmp = *elem;
 
-	tmp = *elem;
 	*elem = (*elem)->next;
-	free(tmp);
+	free((void*)tmp);
 }
 
-void	carriage_list_update(t_carriage** carriages)
+void	carriage_list_update(t_carriage const * *restrict carriages)
 {
-	t_carriage_lst* tmp;
-	t_carriage*		prev_carriage;
-	t_carriage*		elem;
+	t_carriage_lst *restrict	tmp;
+	t_carriage*					prev_carriage;
+	t_carriage*					elem;
 
 	prev_carriage = 0;
-	elem = *carriages;
+	elem = (t_carriage*)*carriages;
 	while (elem)
 	{
 		tmp = find_elem(elem->id);

@@ -34,7 +34,7 @@ static void	complete_carriage(void)
 	}
 }
 
-static void	step_carriage(double start, double time)
+static void	step_carriage(const double start, const double time)
 {
 	t_carriage_lst* elem;
 
@@ -54,9 +54,9 @@ static void	step_carriage(double start, double time)
 	}
 }
 
-char	str_step_carriage(char init, double time)
+char	str_step_carriage(const char init, const double time)
 {
-	static	double	start;
+	static double	start;
 
 	if (init)
 	{

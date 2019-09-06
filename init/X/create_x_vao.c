@@ -48,12 +48,11 @@ static GLuint* create_carriage_indices(void)
 	return (res);
 }
 
-void	create_x_vao(size_t width)
+void	create_x_vao(const size_t width)
 {
-	GLfloat*	verts;
-	GLuint*		indices;
+	GLfloat *restrict	verts;
+	GLuint const *const restrict indices = create_carriage_indices();
 
-	indices = create_carriage_indices();
 	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
 	create_carriage_verts(verts, width);
 	glGenVertexArrays(1, &(g_x.vao));
@@ -70,5 +69,5 @@ void	create_x_vao(size_t width)
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	free(verts);
-	free(indices);
+	free((void*)indices);
 }

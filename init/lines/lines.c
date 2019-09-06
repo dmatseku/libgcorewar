@@ -2,7 +2,7 @@
 
 static GLfloat* create_line_verts(const t_vector verts)
 {
-	GLfloat *const res = (GLfloat*)malloc(sizeof(GLfloat) * 4);
+	GLfloat *const restrict res = (GLfloat*)malloc(sizeof(GLfloat) * 4);
 
 	if (!res)
 	{
@@ -16,9 +16,9 @@ static GLfloat* create_line_verts(const t_vector verts)
 	return (res);
 }
 
-void	create_line_vao(char index, float x, float y, int width)
+void	create_line_vao(const char index, const float x, const float y, const int width)
 {
-	GLfloat*	verts;
+	GLfloat const *restrict	verts;
 	t_vector	coords;
 
 	coords.x = ((float)-width) / g_w_width + x;
@@ -33,5 +33,5 @@ void	create_line_vao(char index, float x, float y, int width)
 	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
-	free(verts);
+	free((void*)verts);
 }

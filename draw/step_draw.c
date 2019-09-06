@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void	step_draw(char new_position)
+void	step_draw(const char new_position)
 {
 	double	time;
 	char	res1;
@@ -21,7 +21,7 @@ void	step_draw(char new_position)
 		if (!res2)
 			res2 = x_step(time, 0, new_position);
 		string_draw();
-		carriages_draw();
+		g_carriages_draw();
 		lines_draw();
 		x_draw();
 		glfwSwapBuffers(g_window);

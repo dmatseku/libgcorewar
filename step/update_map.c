@@ -1,9 +1,28 @@
 #include <libgcorewar.h>
 
-void	update_map(unsigned char const *const map, unsigned char const *const owner)
+void	non_update_map(unsigned char const *const map, unsigned char const *const owner)
 {
 	size_t i;
-	char* tmp;
+
+	i = 0;
+	while (i < MEM_SIZE)
+	{
+		if (map[i] != g_map[i])
+		{
+			g_map[i] = map[i];
+			if (owner[i])
+				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
+			else
+				g_str_map[i]->color = vec3(1.0f, 1.0f, 1.0f);
+		}
+		i++;
+	}
+}
+
+void	update_map(unsigned char const *const map, unsigned char const *const owner)
+{
+	size_t			i;
+	char const *	tmp;
 
 	i = 0;
 	while (i < MEM_SIZE)
@@ -20,7 +39,7 @@ void	update_map(unsigned char const *const map, unsigned char const *const owner
 				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 			else
 				g_str_map[i]->color = vec3(1.0f, 1.0f, 1.0f);
-			free(tmp);
+			free((void*)tmp);
 		}
 		i++;
 	}

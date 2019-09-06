@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void*	str_map_draw_function(t_string const * string, void* param)
+void*	str_map_draw_function(t_string const *const restrict string, void *const param)
 {
 	(void)param;
 

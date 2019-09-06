@@ -15,18 +15,19 @@ static void	carriages_counters_update(void)
 	}
 }
 
-void	corewar_visual_step(t_arena* arena, t_carriage** carriages)
+void	corewar_visual_step(t_arena const *const restrict arena,
+							t_carriage const * *const restrict carriages)
 {
 	static uintmax_t	step_nb = 0;
-	char*				str;
+	char const			*str;
 
 	step_nb++;
 	str = my_uitoa(step_nb);
 	if (!str)
 		exit_error("my_uitoa error");
-	update_map(arena->cell, arena->owner);
+	g_update_map(arena->cell, arena->owner);
 	string_update(g_str_step_counter, str, g_w_width, g_w_height);
-	free(str);
+	free((void*)str);
 	carriage_list_update(carriages);
 	carriages_counters_update();
 	step_draw(arena->lastlive);

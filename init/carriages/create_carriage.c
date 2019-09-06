@@ -10,12 +10,11 @@ static void	set_carriage_height(void)
 	FT_Done_Glyph(glyph);
 }
 
-void	create_carriage(/*t_carriage* carriages*/)
+void	create_carriage(void)
 {
 	size_t frame_length;
-	t_matrix* matrix;
+	t_matrix const *const restrict matrix = matrix_create(4, 4);
 
-	matrix = matrix_create(4, 4);
 	if (!matrix)
 		exit_error("create_matrix error");
 	set_carriage_height();
@@ -24,5 +23,5 @@ void	create_carriage(/*t_carriage* carriages*/)
 			= create_picture_carriege(g_carriage_width, g_carriage_height, frame_length);
 	create_carriage_vao(g_carriage_width, g_carriage_height);
 	g_v_carriage.model = matrix->mat;
-	free(matrix);
+	free((void*)matrix);
 }
