@@ -7,10 +7,10 @@ static void	set_y_coord(void)
 	y = -1.0f - (-1.0f - SPLITER_Y_4) / 2
 		+ (float)(g_str_xlogins[0]->image_height + XLOGINS_DISTANCE + 1) / g_w_height
 		- 0.5f * g_str_xlogins[0]->image_height / g_w_height * 2;
-	g_str_xlogins[0]->translate[13] = y;
-	g_str_xlogins[1]->translate[13] = y;
-	g_str_xlogins[2]->translate[13] = y;
-	g_str_xlogins[3]->translate[13] = y;
+	g_str_xlogins[0]->position.y = y;
+	g_str_xlogins[1]->position.y = y;
+	g_str_xlogins[2]->position.y = y;
+	g_str_xlogins[3]->position.y = y;
 }
 
 static void set_lines(void)
@@ -36,16 +36,16 @@ void	str_xlogins_create(void)
 	const float	d_x = MENU_WIDTH / 5;
 
 	g_str_xlogins[0] = string_get_elem(
-			string_create("okaramel", 1.0f - MENU_WIDTH + d_x, 0,
+			string_create("okaramel", vec4(1.0f - MENU_WIDTH + d_x, 0.0f, 0.0f, 1.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[1] = string_get_elem(
-			string_create("dmatseku", 1.0f - MENU_WIDTH + d_x * 2, 0,
+			string_create("dmatseku", vec4(1.0f - MENU_WIDTH + d_x * 2, 0.0f, 0.0f, 1.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[2] = string_get_elem(
-			string_create("ashypilo", 1.0f - MENU_WIDTH + d_x * 3, 0,
+			string_create("ashypilo", vec4(1.0f - MENU_WIDTH + d_x * 3, 0.0f, 0.0f, 1.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[3] = string_get_elem(
-			string_create("vyunak", 1.0f - MENU_WIDTH + d_x * 4, 0,
+			string_create("vyunak", vec4(1.0f - MENU_WIDTH + d_x * 4, 0.0f, 0.0f, 1.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	set_y_coord();
 	set_lines();

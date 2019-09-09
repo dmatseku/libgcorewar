@@ -23,8 +23,8 @@ static void	create_elem(t_carriage const *const restrict carriage)
 	tmp->player = carriage->player;
 	tmp->position = carriage->positn;
 	tmp->prev_position = carriage->positn;
-	tmp->x = g_str_map[tmp->position]->translate[12];
-	tmp->y = g_str_map[tmp->position]->translate[13];
+	tmp->x = g_str_map[tmp->position]->position.x;
+	tmp->y = g_str_map[tmp->position]->position.y;
 	g_counts[tmp->player - 1]++;
 	carriage_list_add(&g_carriage_lst, tmp);
 }
@@ -73,8 +73,8 @@ void	carriage_list_update(t_carriage const * *restrict carriages)
 		{
 			tmp->prev_position = tmp->position;
 			tmp->position = elem->positn;
-			tmp->x = g_str_map[tmp->position]->translate[12];
-			tmp->y = g_str_map[tmp->position]->translate[13];
+			tmp->x = g_str_map[tmp->position]->position.x;
+			tmp->y = g_str_map[tmp->position]->position.y;
 		}
 		prev_carriage = elem;
 		elem = elem->next;

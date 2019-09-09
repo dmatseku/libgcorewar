@@ -5,10 +5,10 @@ static void str_map_string_complement(size_t i, float x, const float y, const fl
 	while (i % STRING_MAP_ROW_LENGTH)
 	{
 		x += d_x;
-		g_str_map[i] = string_get_elem(string_create_nospace("XX", x,
-			 y,
-			 STRING_MAP_FONTSIZE,
-			 vec3(0.556862745098039f, 0.556862745098039f, 0.556862745098039f), g_window));
+		g_str_map[i] = string_get_elem(string_create_nospace("XX",
+			vec4(x, y, 0.0f, 1.0f),
+			STRING_MAP_FONTSIZE,
+			vec3(0.556862745098039f, 0.556862745098039f, 0.556862745098039f), g_window));
 		g_str_map[i]->draw_func = str_map_draw_function;
 		if (g_carriage_width < g_str_map[i]->image_width)
 			g_carriage_width = g_str_map[i]->image_width;
@@ -38,9 +38,9 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 			if (i > 0)
 				y -= d_y;
 		}
-		g_str_map[i] = string_get_elem(string_create_nospace(tmp, x,
-			 y,
-			 STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
+		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
+			vec4(x, y, 0.0f, 1.0f),
+			STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
 		if (owner[i])
 			g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
@@ -71,8 +71,8 @@ static void	str_map_string_create_h(const float d_x, const float d_y, unsigned c
 			if (i > 0)
 				y -= d_y;
 		}
-		g_str_map[i] = string_get_elem(string_create_nospace(tmp, x,
-			y,
+		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
+			vec4(x, y, 0.0f, 1.0f),
 			STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
 		if (owner[i])
 			g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;

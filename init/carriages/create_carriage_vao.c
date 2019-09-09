@@ -2,10 +2,10 @@
 
 static void create_carriage_verts(GLfloat *const restrict res, const size_t height, const size_t width)
 {
-	const float x = -((float)width) / g_w_width;
-	const float y = -((float)height) / g_w_height;
-	const float x1 = ((float)width) / g_w_width;
-	const float y1 = ((float)height) / g_w_height;
+	const float x = -((float)width - 1) / (float)g_w_width + 2.0f / (float)g_w_width / 4;
+	const float y = -((float)height - 1) / (float)g_w_height + 2.0f / (float)g_w_height / 4;
+	const float x1 = ((float)width + 1) / (float)g_w_width - 2.0f / (float)g_w_width / 4;
+	const float y1 = ((float)height + 1) / (float)g_w_height - 2.0f / (float)g_w_height / 4;
 
 	if (!res)
 		exit_error("malloc error");

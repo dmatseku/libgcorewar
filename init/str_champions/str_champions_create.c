@@ -39,7 +39,7 @@ static void	create_string(const size_t i, t_vector const *const restrict colors,
 		name[STRING_CHAMPION_MAX_LENGTH] = 0;
 	}
 	g_str_champions[i] = string_get_elem(string_create_nospace(name,
-		1.0f - MENU_WIDTH / 2, y,
+		vec4(1.0f - MENU_WIDTH / 2, y, 0.0f, 1.0f),
 		STRING_CHAMPION_FONTSIZE, colors[i % 4], g_window));
 	g_str_champions[i]->active = 0;
 	if (tmp)

@@ -5,22 +5,18 @@ static void	create_strings(void)
 	float d_y;
 
 	g_str_corewar = string_get_elem(string_create("COREWAR",
-			1.0f - MENU_WIDTH / 2,
-			0.5f + SPLITER_Y_1 / 2,
+			vec4(1.0f - MENU_WIDTH / 2, 0.5f + SPLITER_Y_1 / 2, 0.0f, 1.0f),
 			STRING_COREWAR_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 1.0f), g_window));
 	g_str_corewar->active = 0;
 	d_y = (SPLITER_Y_1 - SPLITER_Y_2 - SPLITER_HEIGHT) / 3;
 	g_str_step_counter = string_get_elem(string_create("0",
-			1.0f - MENU_WIDTH / 2,
-			SPLITER_Y_1 - d_y * 2,
+			vec4(1.0f - MENU_WIDTH / 2, SPLITER_Y_1 - d_y * 2, 0.0f, 1.0f),
 			STRING_STEP_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
 	g_str_step = string_get_elem(string_create("STEP:",
-			1.0f - MENU_WIDTH / 2,
-			SPLITER_Y_1 - d_y,
+			vec4(1.0f - MENU_WIDTH / 2, SPLITER_Y_1 - d_y, 0.0f, 1.0f),
 	STRING_STEP_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
 	g_str_dead = string_get_elem(string_create("LIVE CARRIAGES:",
-		1.0f - MENU_WIDTH / 2,
-		SPLITER_Y_3 - (SPLITER_Y_3 - SPLITER_Y_4 - SPLITER_HEIGHT) / 3,
+		vec4(1.0f - MENU_WIDTH / 2, SPLITER_Y_3 - (SPLITER_Y_3 - SPLITER_Y_4 - SPLITER_HEIGHT) / 3, 0.0f, 1.0f),
 		STRING_DEAD_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
 	g_str_step_counter->active = 0;
 	g_str_step->active = 0;

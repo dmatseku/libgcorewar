@@ -5,7 +5,7 @@ size_t math_length(void)
 	const size_t	frame_length = 3;
 
 	g_carriage_height += ((frame_length + 1) * 2);
-	g_carriage_width += ((frame_length + 1) * 2 + 2);
+	g_carriage_width += ((frame_length + 1) * 2);
 	return (frame_length);
 }
 

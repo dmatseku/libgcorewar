@@ -25,8 +25,8 @@ static void	complete_carriage(void)
 	{
 		if (elem->alive && elem->prev_position != elem->position)
 		{
-			elem->x = g_str_map[elem->position]->translate[12];
-			elem->y = g_str_map[elem->position]->translate[13];
+			elem->x = g_str_map[elem->position]->position.x;
+			elem->y = g_str_map[elem->position]->position.y;
 		}
 		else if (!elem->alive)
 			carriage_list_del(&g_carriage_lst, elem);
@@ -43,12 +43,12 @@ static void	step_carriage(const double start, const double time)
 	{
 		if (elem->alive && elem->prev_position != elem->position)
 		{
-			elem->x = g_str_map[elem->prev_position]->translate[12]
-					+ ((g_str_map[elem->position]->translate[12]
-					- g_str_map[elem->prev_position]->translate[12]) / STEP_TIME * (time - start));
-			elem->y = g_str_map[elem->prev_position]->translate[13]
-					+ ((g_str_map[elem->position]->translate[13]
-					- g_str_map[elem->prev_position]->translate[13]) / STEP_TIME * (time - start));
+			elem->x = g_str_map[elem->prev_position]->position.x
+					+ ((g_str_map[elem->position]->position.x
+					- g_str_map[elem->prev_position]->position.x) / STEP_TIME * (time - start));
+			elem->y = g_str_map[elem->prev_position]->position.y
+					+ ((g_str_map[elem->position]->position.y
+					- g_str_map[elem->prev_position]->position.y) / STEP_TIME * (time - start));
 		}
 		elem = elem->next;
 	}
