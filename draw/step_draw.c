@@ -26,5 +26,10 @@ void	step_draw(const char new_position)
 		x_draw();
 		glfwSwapBuffers(g_window);
 	}
+	if (glfwWindowShouldClose(g_window))
+	{
+		glfwTerminate();
+		exit(0);
+	}
 	glfwSetTime(0);
 }

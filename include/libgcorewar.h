@@ -100,12 +100,15 @@
 
 #define MEM_SIZE 4096
 
+#define REG_NUMBER 16
+
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <libmatrix.h>
 #include <libglstring.h>
 #include <lgs.h>
 #include <stdio.h>
+#include <stdint.h>
 
 typedef struct	s_v_carriage t_v_carriage;
 
@@ -128,31 +131,33 @@ typedef struct          s_champ
 	struct s_champ      *next;
 }                       t_champ;
 
-typedef struct		s_arena
+typedef struct			s_arena
 {
-	unsigned int    iter;
-	unsigned int    check;
-	int     		cydeath;
-	unsigned int    sumlive;
-	char    		lastlive;
-	unsigned int    survived;
-	uint_fast8_t	owner[MEM_SIZE];
-	uint_fast8_t	cell[MEM_SIZE];
-}					t_arena;
+    int					iter[2];
+    unsigned int		check;
+    int					cydeath;
+    unsigned int		sumlive;
+    char				lastlive;
+    uint_fast8_t		owner[MEM_SIZE];
+    uint_fast8_t		cell[MEM_SIZE];
+}						t_arena;
 
-typedef struct          s_carriage
+typedef struct			s_carriage
 {
-	unsigned int		id;
-	char				player;
-	char				alive;
-	uint_fast8_t        exec;
-	int                 cylive;
-	int                 cyexec;
-	int                 positn;
-	int                 amskip;
-	uint_fast8_t        reg[0];
-	struct s_carriage   *next;
-}                       t_carriage;
+    unsigned int		id;
+    char				player;
+    char				alive;
+    int					cylive;
+    uint_fast8_t		exec;
+	unsigned int		cyexec;
+    char				typarg[3];
+	unsigned int		posit;
+	unsigned int		amskip;
+    char				carry;
+    int_fast32_t		reg[REG_NUMBER];
+    struct s_carriage	*next;
+    struct s_carriage	*prev;
+}						t_carriage;
 
 typedef struct			s_v_x
 {
@@ -360,5 +365,7 @@ void	carriage_list_update(t_carriage const ** carriages);
 void	str_counters_create(void);
 
 char	x_step(double time, char init, char new_position);
+
+void	corewar_visual_destroy(void);
 
 #endif

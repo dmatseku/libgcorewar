@@ -54,5 +54,10 @@ void	draw_arena(void)
 		}
 		glfwSwapBuffers(g_window);
 	}
+	if (glfwWindowShouldClose(g_window))
+	{
+		glfwTerminate();
+		exit(0);
+	}
 	glfwSetTime(0);
 }
