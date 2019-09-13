@@ -9,10 +9,10 @@ static void	create_strings(void)
 			STRING_COREWAR_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 1.0f), g_window));
 	g_str_corewar->active = 0;
 	d_y = (SPLITER_Y_1 - SPLITER_Y_2 - SPLITER_HEIGHT) / 3;
-	g_str_step_counter = string_get_elem(string_create("0",
+	g_str_step_counter = string_get_elem(string_create_nospace("0",
 			vec4(1.0f - MENU_WIDTH / 2, SPLITER_Y_1 - d_y * 2, 0.0f, 1.0f),
 			STRING_STEP_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
-	g_str_step = string_get_elem(string_create("STEP:",
+	g_str_step = string_get_elem(string_create_nospace("STEP:",
 			vec4(1.0f - MENU_WIDTH / 2, SPLITER_Y_1 - d_y, 0.0f, 1.0f),
 	STRING_STEP_FONTSIZE, vec4(1.0, 1.0, 1.0, 1.0), g_window));
 	g_str_dead = string_get_elem(string_create("LIVE CARRIAGES:",

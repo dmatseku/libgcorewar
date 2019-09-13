@@ -313,10 +313,6 @@ void	create_carriage_vao(size_t width, size_t height);
 
 void	create_x_vao(size_t width);
 
-GLchar const *const	get_carriage_shader_vert(void);
-
-GLchar const *const	get_carriage_shader_frag(void);
-
 GLchar const *const	get_x_shader_vert(void);
 
 GLchar const *const	get_x_shader_frag(void);

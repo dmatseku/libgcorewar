@@ -13,7 +13,7 @@ void	non_update_map(unsigned char const *const map, unsigned char const *const o
 			if (owner[i])
 				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 			else
-				g_str_map[i]->color = vec3(1.0f, 1.0f, 1.0f);
+				g_str_map[i]->color = vec3(0.8f, 0.8f, 0.8f);
 		}
 		i++;
 	}
@@ -38,7 +38,7 @@ void	update_map(unsigned char const *const map, unsigned char const *const owner
 			if (owner[i])
 				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 			else
-				g_str_map[i]->color = vec3(1.0f, 1.0f, 1.0f);
+				g_str_map[i]->color = vec3(0.8f, 0.8f, 0.8f);
 			free((void*)tmp);
 		}
 		i++;
