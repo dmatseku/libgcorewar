@@ -6,7 +6,7 @@ char	x_step(const double time, const char init, const char new_position)
 
 	if (init)
 	{
-		if (!new_position || (g_x.position == new_position && !g_x.init))
+		if (!-new_position || (g_x.position == -new_position && !g_x.init))
 			return (1);
 		if (g_x.init)
 			g_x.color.w = 0.0f;
@@ -22,9 +22,9 @@ char	x_step(const double time, const char init, const char new_position)
 	else if ((time - start) > STEP_TIME * X_SHOW_TIME && (time - start) < STEP_TIME - STEP_TIME * X_SHOW_TIME
 					&& (g_x.color.w != 0 || g_x.position != new_position))
 	{
-		g_x.position = new_position;
-		g_x.model[13] = g_str_champions[new_position - 1]->position.y;
-		g_x.color = g_str_champions[new_position - 1]->color;
+		g_x.position = -new_position;
+		g_x.model[13] = g_str_champions[-new_position - 1]->position.y;
+		g_x.color = g_str_champions[-new_position - 1]->color;
 		g_x.color.w = 0.0f;
 		return (0);
 	}
@@ -36,9 +36,9 @@ char	x_step(const double time, const char init, const char new_position)
 	else if ((time - start) > STEP_TIME)
 	{
 		g_x.draw = 1;
-		g_x.color = g_str_champions[new_position - 1]->color;
-		g_x.model[13] = g_str_champions[new_position - 1]->position.y;
-		g_x.position = new_position;
+		g_x.color = g_str_champions[-new_position - 1]->color;
+		g_x.model[13] = g_str_champions[-new_position - 1]->position.y;
+		g_x.position = -new_position;
 		g_x.init = 0;
 		return (1);
 	}

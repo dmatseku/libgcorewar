@@ -50,8 +50,8 @@ static void	create_spliters(void)
 	g_v_frame[4].color = SPLITER_COLOR;
 }
 
-void	init_set_drawable_elems(t_champ const *const restrict champions,
-			t_arena const *const restrict arena, t_carriage const * *const restrict carriages)
+void	init_set_drawable_elems(t_champ const **const restrict champions,
+			t_arena const *const restrict arena, t_carriage * *const restrict carriages)
 {
 	g_carriage_lst = 0;
 	create_frame_shader_program();

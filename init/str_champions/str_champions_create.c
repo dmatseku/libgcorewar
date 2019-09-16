@@ -1,15 +1,15 @@
 #include <libgcorewar.h>
 
 
-static void champ_length(t_champ const *restrict champions)
-{
-	g_number_of_champions = 0;
-	while (champions)
-	{
-		g_number_of_champions++;
-		champions = champions->next;
-	}
-}
+//static void champ_length(t_champ const *restrict champions)
+//{
+//	g_number_of_champions = 0;
+//	while (champions)
+//	{
+//		g_number_of_champions++;
+//		champions = champions->next;
+//	}
+//}
 
 static t_vector*	set_colors(void)
 {
@@ -46,7 +46,7 @@ static void	create_string(const size_t i, t_vector const *const restrict colors,
 		free(name);
 }
 
-void	str_champions_create(t_champ const *restrict champions)
+void	str_champions_create(t_champ const **const restrict champions)
 {
 	size_t							i;
 	t_vector const *const restrict	colors = set_colors();
@@ -56,15 +56,16 @@ void	str_champions_create(t_champ const *restrict champions)
 	dy = (float)(STRING_CHAMPION_FONTSIZE) / g_w_height + STRING_CHAMPION_SPLITSIZE;
 	y = SPLITER_Y_2 - STRING_CHAMPION_SPLITSIZE
 		- ((float)(STRING_CHAMPION_FONTSIZE) / g_w_height / 2);
-	champ_length(champions);
+	g_number_of_champions = 0;
+	while (champions[g_number_of_champions])
+	    g_number_of_champions++;
 	g_str_champions = (t_string**)malloc(sizeof(t_string*) * g_number_of_champions);
 	if (!g_str_champions || !colors)
 		exit_error("str_champions malloc error");
 	i = 0;
 	while (i < g_number_of_champions)
 	{
-		create_string(i, colors, y, champions->name);
-		champions = champions->next;
+		create_string(i, colors, y, champions[i]->name);
 		y -= dy;
 		i++;
 	}

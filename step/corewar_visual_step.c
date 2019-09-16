@@ -15,8 +15,11 @@ static void	carriages_counters_update(void)
 	}
 }
 
+
+int						out_arena(t_arena *pub);
+
 void	corewar_visual_step(t_arena const *const restrict arena,
-							t_carriage const * *const restrict carriages)
+							t_carriage * *const restrict carriages)
 {
 	static uintmax_t	step_nb = 0;
 	char const			*str;

@@ -1,8 +1,8 @@
 #include <libgcorewar.h>
 
-char	corewar_visual_init(t_champ const *const restrict champions,
+char	corewar_visual_init(t_champ const **const restrict champions,
 							t_arena const *const restrict arena,
-							t_carriage const * *const restrict carriages, const char hidden)
+							t_carriage * *const restrict carriages, const char hidden)
 {
 	g_hidden = hidden;
 	if (!hidden)

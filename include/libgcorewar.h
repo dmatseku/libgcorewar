@@ -92,7 +92,7 @@
 
 #define FRAMES_COUNT 5
 
-#define STEP_TIME 0.5f
+#define STEP_TIME 0.0f
 
 #define FUNC_STATES_COUNT 3
 
@@ -128,7 +128,6 @@ typedef struct          s_champ
 	size_t              size;
 	char                *comm;
 	uint_fast8_t        *exec;
-	struct s_champ      *next;
 }                       t_champ;
 
 typedef struct			s_arena
@@ -138,6 +137,7 @@ typedef struct			s_arena
     int					cydeath;
     unsigned int		sumlive;
     char				lastlive;
+    unsigned int		survived;
     uint_fast8_t		owner[MEM_SIZE];
     uint_fast8_t		cell[MEM_SIZE];
 }						t_arena;
@@ -276,14 +276,14 @@ void	create_x_shader_program(void);
 
 void	create_frame_vao(t_create_frame_vao_args args);
 
-void	init_set_drawable_elems(t_champ const * champions,
-								t_arena const * arena, t_carriage const ** carriages);
+void	init_set_drawable_elems(t_champ const ** champions,
+                                t_arena const * arena, t_carriage ** carriages);
 
 void	draw_arena(void);
 
-char	corewar_visual_init(t_champ const * champions,
-							t_arena const * arena,
-							t_carriage const ** carriages, char hidden);
+char	corewar_visual_init(t_champ const ** champions,
+                            t_arena const * arena,
+                            t_carriage** carriages, char hidden);
 
 char	str_step_counter_draw_init(char init, double time);
 
@@ -303,7 +303,7 @@ void	my_memcpy(void* src, void const * dst, size_t len);
 
 void	my_strncat(char* str1, char const * str2, size_t n);
 
-void	str_champions_create(t_champ const * champions);
+void	str_champions_create(t_champ const ** champions);
 
 GLuint	create_picture_carriege(size_t width, size_t height, size_t frame_length);
 
@@ -337,8 +337,8 @@ void	non_update_map(unsigned char const * map, unsigned char const * owner);
 
 size_t	math_length(void);
 
-void	corewar_visual_step(t_arena const * restrict arena,
-							t_carriage const ** restrict carriages);
+void	corewar_visual_step(t_arena const * arena,
+							t_carriage** carriages);
 
 void	create_carriage(void);
 
@@ -356,7 +356,7 @@ void	carriage_list_add(t_carriage_lst** lst, t_carriage_lst* elem);
 
 void	carriage_list_del(t_carriage_lst** lst, t_carriage_lst* elem);
 
-void	carriage_list_update(t_carriage const ** carriages);
+void	carriage_list_update(t_carriage ** carriages);
 
 void	str_counters_create(void);
 

@@ -35,7 +35,7 @@ static void	free_carriage(t_carriage *const restrict prev, t_carriage const *con
 	free((void*)elem);
 }
 
-static void	free_first_carriage(t_carriage const * *restrict elem)
+static void	free_first_carriage(t_carriage * *restrict elem)
 {
 	t_carriage const *const tmp = *elem;
 
@@ -43,7 +43,7 @@ static void	free_first_carriage(t_carriage const * *restrict elem)
 	free((void*)tmp);
 }
 
-void	carriage_list_update(t_carriage const * *restrict carriages)
+void	carriage_list_update(t_carriage * *restrict carriages)
 {
 	t_carriage_lst *restrict	tmp;
 	t_carriage*					prev_carriage;
