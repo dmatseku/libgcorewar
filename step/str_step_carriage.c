@@ -45,10 +45,10 @@ static void	step_carriage(const double start, const double time)
 		{
 			elem->x = g_str_map[elem->prev_position]->position.x
 					+ ((g_str_map[elem->position]->position.x
-					- g_str_map[elem->prev_position]->position.x) / STEP_TIME * (time - start));
+					- g_str_map[elem->prev_position]->position.x) / g_step_time * (time - start));
 			elem->y = g_str_map[elem->prev_position]->position.y
 					+ ((g_str_map[elem->position]->position.y
-					- g_str_map[elem->prev_position]->position.y) / STEP_TIME * (time - start));
+					- g_str_map[elem->prev_position]->position.y) / g_step_time * (time - start));
 		}
 		elem = elem->next;
 	}
@@ -64,7 +64,7 @@ char	str_step_carriage(const char init, const double time)
 		start = time;
 		return (0);
 	}
-	else if (time - start > STEP_TIME)
+	else if (time - start > g_step_time)
 	{
 		complete_carriage();
 		return (1);

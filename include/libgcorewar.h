@@ -74,7 +74,7 @@
 #define XLOGINS_FONTSIZE 37
 #define XLOGINS_DISTANCE -2
 
-#define X_DISTANCE 10
+#define X_DISTANCE 50
 #endif
 
 #define MENU_COLOR vec4(0.21568627451f, 0.21568627451f, 0.21568627451f, 0.0f)
@@ -92,8 +92,6 @@
 
 #define FRAMES_COUNT 5
 
-#define STEP_TIME 0.0f
-
 #define FUNC_STATES_COUNT 3
 
 #define STRING_STATIC_INIT_TIME 1.0f
@@ -101,6 +99,8 @@
 #define MEM_SIZE 4096
 
 #define REG_NUMBER 16
+
+#define	DELTA_STEP 0.005f
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -118,17 +118,17 @@ typedef struct			s_line
 {
 	GLuint				vao;
 	GLuint				vbo;
-	t_vector			color;
+	t_vec4				color;
 }						t_line;
 
-typedef struct          s_champ
+typedef struct			s_champ
 {
-	char                id;
-	char                *name;
-	size_t              size;
-	char                *comm;
-	uint_fast8_t        *exec;
-}                       t_champ;
+    char				id;
+    char				*name;
+    unsigned int		size;
+    char				*comm;
+    uint_fast8_t		*exec;
+}						t_champ;
 
 typedef struct			s_arena
 {
@@ -149,10 +149,10 @@ typedef struct			s_carriage
     char				alive;
     int					cylive;
     uint_fast8_t		exec;
-	unsigned int		cyexec;
+    unsigned int		cyexec;
     char				typarg[3];
-	unsigned int		posit;
-	unsigned int		amskip;
+    unsigned int		posit;
+    unsigned int		amskip;
     char				carry;
     int_fast32_t		reg[REG_NUMBER];
     struct s_carriage	*next;
@@ -161,7 +161,7 @@ typedef struct			s_carriage
 
 typedef struct			s_v_x
 {
-	float*				model;
+	t_mat4				model;
 	GLuint				vao;
 	GLuint				vbo;
 	GLuint				ebo;
@@ -169,13 +169,13 @@ typedef struct			s_v_x
 	char				draw;
 	char				init;
 	char				position;
-	t_vector			color;
+	t_vec4				color;
 }						t_v_x;
 
 struct				s_v_carriage
 {
 	GLuint			picture;
-	float*			model;
+	t_mat4			model;
 	GLuint			vao;
 	GLuint			vbo;
 	GLuint			ebo;
@@ -201,12 +201,12 @@ typedef struct	s_v_frame
 	GLuint		vao;
 	GLuint		vbo;
 	GLuint		ebo;
-	t_vector	color;
+	t_vec4		color;
 }				t_v_frame;
 
 typedef struct	s_create_frame_vao_args
 {
-	t_vector		args;
+	t_vec4			args;
 	t_v_frame*		vao;
 }				t_create_frame_vao_args;
 
@@ -262,6 +262,10 @@ t_string**		g_counters;
 
 char			g_hidden;
 
+float			g_step_time;
+
+char			g_pause;
+
 size_t	my_strlen(char const * str);
 
 void	exit_error(char *str);
@@ -283,7 +287,7 @@ void	draw_arena(void);
 
 char	corewar_visual_init(t_champ const ** champions,
                             t_arena const * arena,
-                            t_carriage** carriages, char hidden);
+                            t_carriage** carriages);
 
 char	str_step_counter_draw_init(char init, double time);
 

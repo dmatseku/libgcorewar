@@ -12,16 +12,12 @@ static void	set_carriage_height(void)
 
 void	create_carriage(void)
 {
-	size_t frame_length;
-	t_matrix const *const restrict matrix = matrix_create(4, 4);
+	size_t			frame_length;
 
-	if (!matrix)
-		exit_error("create_matrix error");
 	set_carriage_height();
 	frame_length = math_length();
 	g_v_carriage.picture
 			= create_picture_carriege(g_carriage_width, g_carriage_height, frame_length);
 	create_carriage_vao(g_carriage_width, g_carriage_height);
-	g_v_carriage.model = matrix->mat;
-	free((void*)matrix);
+	g_v_carriage.model = mat4_init();
 }

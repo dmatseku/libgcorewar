@@ -36,16 +36,16 @@ void	str_xlogins_create(void)
 	const float	d_x = MENU_WIDTH / 5;
 
 	g_str_xlogins[0] = string_get_elem(
-			string_create("okaramel", vec4(1.0f - MENU_WIDTH + d_x, 0.0f, 0.0f, 1.0f),
+			string_create("okaramel", vec3(1.0f - MENU_WIDTH + d_x, 0.0f, 0.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[1] = string_get_elem(
-			string_create("dmatseku", vec4(1.0f - MENU_WIDTH + d_x * 2, 0.0f, 0.0f, 1.0f),
+			string_create("dmatseku", vec3(1.0f - MENU_WIDTH + d_x * 2, 0.0f, 0.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[2] = string_get_elem(
-			string_create("ashypilo", vec4(1.0f - MENU_WIDTH + d_x * 3, 0.0f, 0.0f, 1.0f),
+			string_create("ashypilo", vec3(1.0f - MENU_WIDTH + d_x * 3, 0.0f, 0.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	g_str_xlogins[3] = string_get_elem(
-			string_create("vyunak", vec4(1.0f - MENU_WIDTH + d_x * 4, 0.0f, 0.0f, 1.0f),
+			string_create("vyunak", vec3(1.0f - MENU_WIDTH + d_x * 4, 0.0f, 0.0f),
 					XLOGINS_FONTSIZE, vec4(1.0f, 1.0f, 1.0f, 0.0f), g_window));
 	set_y_coord();
 	set_lines();

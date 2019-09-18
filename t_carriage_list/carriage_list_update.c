@@ -29,27 +29,29 @@ static void	create_elem(t_carriage const *const restrict carriage)
 	carriage_list_add(&g_carriage_lst, tmp);
 }
 
-static void	free_carriage(t_carriage *const restrict prev, t_carriage const *const restrict elem)
+static void free_carriage(t_carriage *restrict del)
 {
-	prev->next = elem->next;
-	free((void*)elem);
+	del->prev->next = del->next;
+	if (del->next)
+		del->next->prev = del->prev;
+	free(del);
 }
 
 static void	free_first_carriage(t_carriage * *restrict elem)
 {
-	t_carriage const *const tmp = *elem;
+	t_carriage *const tmp = *elem;
 
 	*elem = (*elem)->next;
-	free((void*)tmp);
+	if (*elem)
+        (*elem)->prev = 0;
+	free(tmp);
 }
 
 void	carriage_list_update(t_carriage * *restrict carriages)
 {
 	t_carriage_lst *restrict	tmp;
-	t_carriage*					prev_carriage;
 	t_carriage*					elem;
 
-	prev_carriage = 0;
 	elem = (t_carriage*)*carriages;
 	while (elem)
 	{
@@ -59,14 +61,14 @@ void	carriage_list_update(t_carriage * *restrict carriages)
 		else if (!elem->alive)
 		{
 			tmp->alive = 0;
-			if (!prev_carriage)
+			if (elem == *carriages)
 			{
 				elem = elem->next;
 				free_first_carriage(carriages);
 				continue ;
 			}
 			else
-				free_carriage(prev_carriage, elem);
+				free_carriage(elem);
 			g_counts[tmp->player - 1]--;
 		}
 		else
@@ -76,7 +78,6 @@ void	carriage_list_update(t_carriage * *restrict carriages)
 			tmp->x = g_str_map[tmp->position]->position.x;
 			tmp->y = g_str_map[tmp->position]->position.y;
 		}
-		prev_carriage = elem;
 		elem = elem->next;
 	}
 }

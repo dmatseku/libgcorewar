@@ -11,9 +11,9 @@
 //	}
 //}
 
-static t_vector*	set_colors(void)
+static t_vec4*	set_colors(void)
 {
-	t_vector *const restrict vectors = (t_vector*)malloc(sizeof(t_vector) * 4);
+	t_vec4 *const restrict vectors = (t_vec4*)malloc(sizeof(t_vec4) * 4);
 
 	vectors[0] = vec4(0.850980392156863f, 0.325490196078431f, 0.309803921568627f, 1.0f);
 	vectors[1] = vec4(1.0f, 0.654901960784314f, 0.0f, 1.0f);
@@ -22,7 +22,7 @@ static t_vector*	set_colors(void)
 	return (vectors);
 }
 
-static void	create_string(const size_t i, t_vector const *const restrict colors,
+static void	create_string(const size_t i, t_vec4 const *const restrict colors,
 									const float y, char* name)
 {
 	char const *	tmp;
@@ -39,7 +39,7 @@ static void	create_string(const size_t i, t_vector const *const restrict colors,
 		name[STRING_CHAMPION_MAX_LENGTH] = 0;
 	}
 	g_str_champions[i] = string_get_elem(string_create_nospace(name,
-		vec4(1.0f - MENU_WIDTH / 2, y, 0.0f, 1.0f),
+		vec3(1.0f - MENU_WIDTH / 2, y, 0.0f),
 		STRING_CHAMPION_FONTSIZE, colors[i % 4], g_window));
 	g_str_champions[i]->active = 0;
 	if (tmp)
@@ -49,7 +49,7 @@ static void	create_string(const size_t i, t_vector const *const restrict colors,
 void	str_champions_create(t_champ const **const restrict champions)
 {
 	size_t							i;
-	t_vector const *const restrict	colors = set_colors();
+	t_vec4 const *const restrict	colors = set_colors();
 	float							dy;
 	float							y;
 

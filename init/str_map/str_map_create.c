@@ -23,8 +23,8 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 				y -= d_y;
 		}
 		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
-			vec4(x, y, 0.0f, 1.0f),
-			STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
+			vec3(x, y, 0.0f),
+			STRING_MAP_FONTSIZE, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
 		if (owner[i])
             (g_str_map[i])->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
@@ -55,8 +55,8 @@ static void	str_map_string_create_h(const float d_x, const float d_y, unsigned c
 				y -= d_y;
 		}
 		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
-			vec4(x, y, 0.0f, 1.0f),
-			STRING_MAP_FONTSIZE, vec3(0.8f, 0.8f, 0.8f), g_window));
+			vec3(x, y, 0.0f),
+			STRING_MAP_FONTSIZE, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
 		if (owner[i])
 			g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
@@ -80,8 +80,7 @@ void	str_map_create(unsigned char const *const map, unsigned char const *const o
 		i++;
 	}
 	g_carriage_width = 0;
-	g_str_map = (t_string**)malloc(sizeof(t_string*)
-			* MEM_SIZE);
+	g_str_map = (t_string**)malloc(sizeof(t_string*) * (MEM_SIZE + 1));
 	if (g_hidden)
 		str_map_string_create_h((2.0f - MENU_WIDTH) / (STRING_MAP_ROW_LENGTH + 2),
 			2.0f / (MEM_SIZE / STRING_MAP_ROW_LENGTH + 2), owner);

@@ -1,28 +1,50 @@
 #include <libgcorewar.h>
+#include <libmatrix.h>
 
-static void create_carriage_verts(GLfloat *const restrict res, const size_t height, const size_t width)
+static void create_carriage_verts(GLfloat *const restrict res, const int height, const int width)
 {
-	const float x = -((float)width - 1) / (float)g_w_width + 2.0f / (float)g_w_width / 4;
-	const float y = -((float)height - 1) / (float)g_w_height + 2.0f / (float)g_w_height / 4;
-	const float x1 = ((float)width + 1) / (float)g_w_width - 2.0f / (float)g_w_width / 4;
-	const float y1 = ((float)height + 1) / (float)g_w_height - 2.0f / (float)g_w_height / 4;
+//	const float x = -((float)width - 1) / (float)g_w_width + 2.0f / (float)g_w_width / 4;
+//	const float y = -((float)height - 1) / (float)g_w_height + 2.0f / (float)g_w_height / 4;
+//	const float x1 = ((float)width + 1) / (float)g_w_width - 2.0f / (float)g_w_width / 4;
+//	const float y1 = ((float)height + 1) / (float)g_w_height - 2.0f / (float)g_w_height / 4;
+	t_vec4					left_top;
+	t_vec4					left_bottom;
+	t_vec4					right_top;
+	t_vec4					right_bottom;
+	t_mat4					proj;
 
 	if (!res)
 		exit_error("malloc error");
-	res[0] = x;
-	res[1] = y;
+
+	proj = mat4_orthographic(-(g_w_width / 2), g_w_width / 2 + g_w_width % 2, -(g_w_height / 2),
+							 g_w_height / 2 + g_w_height % 2, 0.001f, 100.0f);
+
+	left_top = mat_vec_4_mult(proj, vec4
+	(-(width / 2), height / 2 + height % 2, 1.0f, 1.0f));
+
+	left_bottom = mat_vec_4_mult(proj, vec4
+	(-(width / 2), -(height / 2), 1.0f, 1.0f));
+
+	right_top = mat_vec_4_mult(proj, vec4
+	(width / 2 + width % 2, height / 2 + height % 2, 1.0f, 1.0f));
+
+	right_bottom = mat_vec_4_mult(proj, vec4
+	(width / 2 + width % 2, -(height / 2), 1.0f, 1.0f));
+
+	res[0] = left_bottom.x;
+	res[1] = left_bottom.y;
 	res[2] = 0.0f;
 	res[3] = 1.0f;
-	res[4] = x;
-	res[5] = y1;
+	res[4] = left_top.x;
+	res[5] = left_top.y;
 	res[6] = 0.0f;
 	res[7] = 0.0f;
-	res[8] = x1;
-	res[9] = y;
+	res[8] = right_bottom.x;
+	res[9] = right_bottom.y;
 	res[10] = 1.0f;
 	res[11] = 1.0f;
-	res[12] = x1;
-	res[13] = y1;
+	res[12] = right_top.x;
+	res[13] = right_top.y;
 	res[14] = 1.0f;
 	res[15] = 0.0f;
 }

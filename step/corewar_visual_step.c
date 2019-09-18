@@ -25,6 +25,8 @@ void	corewar_visual_step(t_arena const *const restrict arena,
 	char const			*str;
 
 	step_nb++;
+	if (step_nb < 15000)
+		return;
 	str = my_uitoa(step_nb);
 	if (!str)
 		exit_error("my_uitoa error");

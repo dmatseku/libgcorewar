@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-static GLfloat* create_line_verts(const t_vector verts)
+static GLfloat* create_line_verts(const t_vec3 verts)
 {
 	GLfloat *const restrict res = (GLfloat*)malloc(sizeof(GLfloat) * 4);
 
@@ -19,7 +19,7 @@ static GLfloat* create_line_verts(const t_vector verts)
 void	create_line_vao(const char index, const float x, const float y, const int width)
 {
 	GLfloat const *restrict	verts;
-	t_vector	coords;
+	t_vec3					coords;
 
 	coords.x = ((float)-width) / g_w_width + x;
 	coords.y = ((float)width) / g_w_width + x;

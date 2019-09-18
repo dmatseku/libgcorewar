@@ -13,7 +13,7 @@ void	non_update_map(unsigned char const *const map, unsigned char const *const o
 			if (owner[i])
 				g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 			else
-				g_str_map[i]->color = vec3(0.8f, 0.8f, 0.8f);
+				g_str_map[i]->color = vec4(0.8f, 0.8f, 0.8f, 1.0f);
 		}
 		i++;
 	}
@@ -33,14 +33,13 @@ void	update_map(unsigned char const *const map, unsigned char const *const owner
 			tmp = my_base(g_map[i]);
 			if (!tmp)
 				exit_error("itoa error");
-			if (!string_update_nospace(g_str_map[i], tmp, g_w_width, g_w_height))
-				exit_error("string_update error");
+			string_update_nospace(g_str_map[i], tmp, g_w_width, g_w_height);
             free((void*)tmp);
         }
         if (owner[i])
             (g_str_map[i])->color = g_str_champions[owner[i] - 1]->color;
         else
-            (g_str_map[i])->color = vec3(0.8f, 0.8f, 0.8f);
+            (g_str_map[i])->color = vec4(0.8f, 0.8f, 0.8f, 1.0f);
 		i++;
 	}
 }

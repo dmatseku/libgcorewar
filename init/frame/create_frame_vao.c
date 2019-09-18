@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-static GLfloat* create_frame_verts(const t_vector verts)
+static GLfloat* create_frame_verts(const t_vec4 verts)
 {
 	GLfloat *const restrict res = (GLfloat*)malloc(sizeof(GLfloat) * 8);
 

@@ -1,20 +1,20 @@
 #include <libgcorewar.h>
+#include <libglKH.h>
+#include <keys.h>
+
+void	init_keys(void)
+{
+	key_handler_add(GLFW_KEY_LEFT, KEY_MONO_REPEAT, 0, 0, key_left);
+	key_handler_add(GLFW_KEY_RIGHT, KEY_MONO_REPEAT, 0, key_right_condition, key_right);
+	key_handler_add(GLFW_KEY_ESCAPE, KEY_RELEASE, 0, 0, key_escape);
+	key_handler_add(GLFW_KEY_SPACE, KEY_RELEASE, 0, 0, key_space);
+	key_handler_add(GLFW_KEY_LEFT_SHIFT, KEY_RELEASE, 0, 0, key_shift);
+}
 
 char	corewar_visual_init(t_champ const **const restrict champions,
 							t_arena const *const restrict arena,
-							t_carriage * *const restrict carriages, const char hidden)
+							t_carriage * *const restrict carriages)
 {
-	g_hidden = hidden;
-	if (!hidden)
-	{
-		g_update_map = update_map;
-		g_carriages_draw = carriages_draw;
-	}
-	else
-	{
-		g_update_map = non_update_map;
-		g_carriages_draw = non_carriages_draw;
-	}
 	if (!glfwInit())
 		exit_error("glfw init error");
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -36,5 +36,7 @@ char	corewar_visual_init(t_champ const **const restrict champions,
 	glfwGetFramebufferSize(g_window, &g_w_width, &g_w_height);
 	glViewport(0, 0, g_w_width, g_w_height);
 	init_set_drawable_elems(champions, arena, carriages);
+	key_handler_init(g_window);
+	init_keys();
 	return (1);
 }

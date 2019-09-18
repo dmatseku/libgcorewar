@@ -3,8 +3,8 @@ project(gcorewar C)
 
 set(CMAKE_C_STANDARD 99)
 
-#    include_directories(include  ../libmatrix/includes/ ../libglstring/includes)
-    include_directories(include ../../libglstring/includes ../../libmatrix/includes
+#    include_directories(./include/ ./keys/ ../libmatrix/includes/ ../libglstring/includes)
+    include_directories(include ./keys/ ../../libglKH/includes ../../libglstring/includes ../../libmatrix/includes
         ../../brew/Cellar/freetype/2.10.1/include/freetype2/ ../../brew/Cellar/glew/2.1.0/include/
         ../../brew/Cellar/glfw/3.3/include/)
 
@@ -34,4 +34,4 @@ add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_s
         init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/X/create_x_vao.c
         init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c
         t_carriage_list/carriage_list_update.c t_carriage_list/carriage_list_add.c t_carriage_list/carriage_list_del.c
-        init/str_counters/str_counters_create.c step/step_x.c corewar_visual_destroy.c)
+        init/str_counters/str_counters_create.c step/step_x.c corewar_visual_destroy.c keys/key_left_right.c keys/keys.h keys/key_escape.c keys/key_space.c keys/key_shift.c)
