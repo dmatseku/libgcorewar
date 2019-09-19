@@ -51,10 +51,14 @@
 #define SPLITER_Y_2 0.5f
 #define SPLITER_Y_3 -0.6f
 #define SPLITER_Y_4 -0.85f
+#define SPLITER_Y_5 -0.33f
+
 
 #define STRING_COREWAR_FONTSIZE 180
 
 #define STRING_STEP_FONTSIZE 110
+
+#define STRING_INFO_FONTSIZE 60
 
 #define STRING_CHAMPION_SPLITSIZE 0.08f
 #define STRING_CHAMPION_FONTSIZE 120
@@ -90,7 +94,7 @@
 
 #define FONT_PATH "../Oswald-Regular.ttf"
 
-#define FRAMES_COUNT 5
+#define FRAMES_COUNT 6
 
 #define FUNC_STATES_COUNT 3
 
@@ -100,7 +104,7 @@
 
 #define REG_NUMBER 16
 
-#define	DELTA_STEP 0.005f
+#define	DELTA_STEP 0.01f
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -214,6 +218,16 @@ void			(*g_update_map)(unsigned char const * map, unsigned char const * owner);
 void			(*g_carriages_draw)(void);
 t_carriage_lst*	g_carriage_lst;
 
+t_string*		g_str_cyc_to_die_intro;
+
+t_string*		g_str_speed_intro;
+
+int				g_last_cyc_to_die;
+
+t_string*		g_str_cyc_to_die;
+
+t_string*		g_str_speed;
+
 t_string*		g_str_dead;
 
 t_string*		g_str_corewar;
@@ -301,7 +315,7 @@ void	my_memset(void* array, int symbol, size_t size);
 
 char	*my_uitoa(uintmax_t n);
 
-char	*my_base(unsigned char nb);
+void	my_base(unsigned char nb, char* str);
 
 void	my_memcpy(void* src, void const * dst, size_t len);
 

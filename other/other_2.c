@@ -51,14 +51,10 @@ static char	convert_to_char(const unsigned char nb)
 	return ('A' + nb - 10);
 }
 
-char		*my_base(unsigned char nb)
+void	my_base(unsigned char nb, char* str)
 {
-	char    *const restrict res = (char*)malloc(sizeof(char) * 3);
-	if (!res)
-		exit_error("malloc error");
-	res[1] = convert_to_char(nb % 16);
+	str[1] = convert_to_char(nb % 16);
 	nb /= 16;
-	res[0] = convert_to_char(nb % 16);
-	res[2] = '\0';
-	return (res);
+	str[0] = convert_to_char(nb % 16);
+	str[2] = '\0';
 }

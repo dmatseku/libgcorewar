@@ -3,7 +3,7 @@
 void	key_shift(void* args)
 {
 	size_t i;
-	char* tmp;
+	char tmp[3] = "XX\0";
 
 	i = 0;
 	(void)args;
@@ -14,11 +14,8 @@ void	key_shift(void* args)
 		g_carriages_draw = carriages_draw;
 		while (i < MEM_SIZE)
 		{
-			tmp = my_base(g_map[i]);
-			if (!tmp)
-				exit_error("itoa error");
+			my_base(g_map[i], tmp);
 			string_update_nospace(g_str_map[i], tmp, g_w_width, g_w_height);
-			free((void*)tmp);
 			i++;
 		}
 	}
@@ -26,7 +23,6 @@ void	key_shift(void* args)
 	{
 		g_update_map = non_update_map;
 		g_carriages_draw = non_carriages_draw;
-		tmp = "XX";
 		while (i < MEM_SIZE)
 		{
 			string_update_nospace(g_str_map[i], tmp, g_w_width, g_w_height);

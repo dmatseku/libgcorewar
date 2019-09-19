@@ -2,19 +2,17 @@
 
 static void	str_map_string_create(const float d_x, const float d_y, unsigned char const *const owner)
 {
-	size_t i;
-	char const * tmp;
-	float x;
-	float y;
+	size_t	i;
+	char	tmp[3];
+	float	x;
+	float	y;
 
 	i = 0;
 	x = 0;
 	y = 1.0f - d_y - d_y / 2;
 	while (i < MEM_SIZE)
 	{
-		tmp = my_base(g_map[i]);
-		if (!tmp)
-			exit_error("itoa error");
+		my_base(g_map[i], tmp);
 		x += d_x;
 		if (i % STRING_MAP_ROW_LENGTH == 0)
 		{
@@ -30,7 +28,6 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 		g_str_map[i]->draw_func = str_map_draw_function;
 		if (g_carriage_width < g_str_map[i]->image_width)
 			g_carriage_width = g_str_map[i]->image_width;
-		free((void*)tmp);
 		i++;
 	}
 }

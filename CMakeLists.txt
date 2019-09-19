@@ -19,7 +19,7 @@ set(CMAKE_C_STANDARD 99)
 #link_directories(./cmake-build-debug ../../brew/Cellar/freetype/2.10.1/lib/ ../../brew/Cellar/glew/2.1.0/lib/
 #        ../../brew/Cellar/glfw/3.3/lib/)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
 
 add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_set_drawable_elems.c
         init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c
