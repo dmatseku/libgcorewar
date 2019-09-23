@@ -28,10 +28,10 @@ static char	call_init_funcs(char *const restrict states, const double time)
 void	draw_arena(void)
 {
 	double	time;
-	char	func_states[FUNC_STATES_COUNT];
+	char	func_states[FU_SC];
 	char	tmp;
 
-	my_memset(func_states, -1, FUNC_STATES_COUNT);
+	my_memset(func_states, -1, FU_SC);
 	g_str_step_counter->active = 0;
 	tmp = -1;
 	string_draw();

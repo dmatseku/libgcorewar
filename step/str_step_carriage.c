@@ -2,7 +2,7 @@
 
 static void	init_carriage(void)
 {
-	t_carriage_lst* elem;
+	t_carr_lst* elem;
 
 	elem = g_carriage_lst;
 	while (elem)
@@ -18,7 +18,7 @@ static void	init_carriage(void)
 
 static void	complete_carriage(void)
 {
-	t_carriage_lst* elem;
+	t_carr_lst* elem;
 
 	elem = g_carriage_lst;
 	while (elem)
@@ -36,7 +36,7 @@ static void	complete_carriage(void)
 
 static void	step_carriage(const double start, const double time)
 {
-	t_carriage_lst* elem;
+	t_carr_lst* elem;
 
 	elem = g_carriage_lst;
 	while (elem)

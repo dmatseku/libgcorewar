@@ -1,6 +1,6 @@
 #include <libgcorewar.h>
 
-void	carriage_list_del(t_carriage_lst* *const restrict lst, t_carriage_lst *const elem)
+void	carriage_list_del(t_carr_lst* *const restrict lst, t_carr_lst *const elem)
 {
 	if (*lst == elem)
 	{

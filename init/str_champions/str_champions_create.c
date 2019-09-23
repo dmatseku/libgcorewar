@@ -1,16 +1,5 @@
 #include <libgcorewar.h>
 
-
-//static void champ_length(t_champ const *restrict champions)
-//{
-//	g_number_of_champions = 0;
-//	while (champions)
-//	{
-//		g_number_of_champions++;
-//		champions = champions->next;
-//	}
-//}
-
 static t_vec4*	set_colors(void)
 {
 	t_vec4 *const restrict vectors = (t_vec4*)malloc(sizeof(t_vec4) * 4);
@@ -28,19 +17,19 @@ static void	create_string(const size_t i, t_vec4 const *const restrict colors,
 	char const *	tmp;
 
 	tmp = 0;
-	if (ft_strlen(name) > STRING_CHAMPION_MAX_LENGTH)
+	if (ft_strlen(name) > STR_CH_ML)
 	{
 		tmp = name;
-		name = (char*)malloc(sizeof(char) * STRING_CHAMPION_MAX_LENGTH + 1);
+		name = (char*)malloc(sizeof(char) * STR_CH_ML + 1);
 		if (!name)
 			exit_error("create string malloc error");
-		my_strncat(name, tmp, STRING_CHAMPION_MAX_LENGTH - 3);
-		my_memset(name + STRING_CHAMPION_MAX_LENGTH - 3, '.', 3);
-		name[STRING_CHAMPION_MAX_LENGTH] = 0;
+		my_strncat(name, tmp, STR_CH_ML - 3);
+		my_memset(name + STR_CH_ML - 3, '.', 3);
+		name[STR_CH_ML] = 0;
 	}
 	g_str_champions[i] = string_get_elem(string_create_nospace(name,
-		vec3(1.0f - MENU_WIDTH / 2, y, 0.0f),
-		STRING_CHAMPION_FONTSIZE, colors[i % 4], g_window));
+		vec3(1.0f - M_W / 2, y, 0.0f),
+		STR_CH_FS, colors[i % 4], g_window));
 	g_str_champions[i]->active = 0;
 	if (tmp)
 		free(name);
@@ -53,9 +42,9 @@ void	str_champions_create(t_champ const **const restrict champions)
 	float							dy;
 	float							y;
 
-	dy = (float)(STRING_CHAMPION_FONTSIZE) / g_w_height + STRING_CHAMPION_SPLITSIZE;
-	y = SPLITER_Y_2 - STRING_CHAMPION_SPLITSIZE
-		- ((float)(STRING_CHAMPION_FONTSIZE) / g_w_height / 2);
+	dy = (float)(STR_CH_FS) / g_w_height + STR_CH_SS;
+	y = S_2 - STR_CH_SS
+		- ((float)(STR_CH_FS) / g_w_height / 2);
 	g_number_of_champions = 0;
 	while (champions[g_number_of_champions])
 	    g_number_of_champions++;

@@ -1,9 +1,9 @@
 #include <libgcorewar.h>
 #include <stdlib.h>
 
-static t_carriage_lst*	find_elem(const unsigned int id)
+static t_carr_lst*	find_elem(const unsigned int id)
 {
-	t_carriage_lst* tmp;
+	t_carr_lst* tmp;
 
 	tmp = g_carriage_lst;
 	while (tmp && tmp->id != id)
@@ -13,9 +13,9 @@ static t_carriage_lst*	find_elem(const unsigned int id)
 
 static void	create_elem(t_carriage const *const restrict carriage)
 {
-	t_carriage_lst* tmp;
+	t_carr_lst* tmp;
 
-	tmp = (t_carriage_lst*)malloc(sizeof(t_carriage_lst));
+	tmp = (t_carr_lst*)malloc(sizeof(t_carr_lst));
 	if (!tmp)
 		exit_error("malloc error");
 	tmp->id = carriage->id;
@@ -49,7 +49,7 @@ static void	free_first_carriage(t_carriage * *restrict elem)
 
 void	carriage_list_update(t_carriage * *restrict carriages)
 {
-	t_carriage_lst *restrict	tmp;
+	t_carr_lst *restrict	tmp;
 	t_carriage*					elem;
 
 	elem = (t_carriage*)*carriages;

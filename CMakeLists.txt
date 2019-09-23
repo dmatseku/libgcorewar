@@ -19,7 +19,7 @@ set(CMAKE_C_STANDARD 99)
 #link_directories(./cmake-build-debug ../../brew/Cellar/freetype/2.10.1/lib/ ../../brew/Cellar/glew/2.1.0/lib/
 #        ../../brew/Cellar/glfw/3.3/lib/)
 
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS}")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Ofast")
 
 add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_set_drawable_elems.c
         init/frame/create_frame_vao.c init/shaders/frame_shaders.c init/frame/create_frame_shader_program.c
@@ -34,4 +34,4 @@ add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_s
         init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/X/create_x_vao.c
         init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c
         t_carriage_list/carriage_list_update.c t_carriage_list/carriage_list_add.c t_carriage_list/carriage_list_del.c
-        init/str_counters/str_counters_create.c step/step_x.c corewar_visual_destroy.c keys/key_left_right.c keys/keys.h keys/key_escape.c keys/key_space.c keys/key_shift.c)
+        init/str_counters/str_counters_create.c step/step_x.c destroy/corewar_visual_destroy.c keys/key_left_right.c keys/keys.h keys/key_escape.c keys/key_space.c keys/key_shift.c destroy/string_animation_destroy.c draw/destroy_draw.c destroy/string_winner_animation_init.c)

@@ -14,7 +14,7 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 	{
 		my_base(g_map[i], tmp);
 		x += d_x;
-		if (i % STRING_MAP_ROW_LENGTH == 0)
+		if (i % STR_M_RL == 0)
 		{
 			x = -1.0f + d_x + d_x / 2;
 			if (i > 0)
@@ -22,7 +22,7 @@ static void	str_map_string_create(const float d_x, const float d_y, unsigned cha
 		}
 		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
 			vec3(x, y, 0.0f),
-			STRING_MAP_FONTSIZE, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
+			STR_M_FS, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
 		if (owner[i])
             (g_str_map[i])->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
@@ -45,7 +45,7 @@ static void	str_map_string_create_h(const float d_x, const float d_y, unsigned c
 	while (i < MEM_SIZE)
 	{
 		x += d_x;
-		if (i % STRING_MAP_ROW_LENGTH == 0)
+		if (i % STR_M_RL == 0)
 		{
 			x = -1.0f + d_x + d_x / 2;
 			if (i > 0)
@@ -53,7 +53,7 @@ static void	str_map_string_create_h(const float d_x, const float d_y, unsigned c
 		}
 		g_str_map[i] = string_get_elem(string_create_nospace(tmp,
 			vec3(x, y, 0.0f),
-			STRING_MAP_FONTSIZE, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
+			STR_M_FS, vec4(0.8f, 0.8f, 0.8f, 1.0f), g_window));
 		if (owner[i])
 			g_str_map[i]->color = g_str_champions[owner[i] - 1]->color;
 		g_str_map[i]->draw_func = str_map_draw_function;
@@ -79,11 +79,11 @@ void	str_map_create(unsigned char const *const map, unsigned char const *const o
 	g_carriage_width = 0;
 	g_str_map = (t_string**)malloc(sizeof(t_string*) * (MEM_SIZE + 1));
 	if (g_hidden)
-		str_map_string_create_h((2.0f - MENU_WIDTH) / (STRING_MAP_ROW_LENGTH + 2),
-			2.0f / (MEM_SIZE / STRING_MAP_ROW_LENGTH + 2), owner);
+		str_map_string_create_h((2.0f - M_W) / (STR_M_RL + 2),
+			2.0f / (MEM_SIZE / STR_M_RL + 2), owner);
 	else
-		str_map_string_create((2.0f - MENU_WIDTH) / (STRING_MAP_ROW_LENGTH + 2),
-		 	2.0f / (MEM_SIZE / STRING_MAP_ROW_LENGTH + 2), owner);
+		str_map_string_create((2.0f - M_W) / (STR_M_RL + 2),
+		 	2.0f / (MEM_SIZE / STR_M_RL + 2), owner);
 	g_map_opacity = 0.0f;
 }
 

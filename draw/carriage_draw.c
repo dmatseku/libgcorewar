@@ -7,7 +7,7 @@ void	non_carriages_draw(void)
 
 void	carriages_draw(void)
 {
-	t_carriage_lst const *restrict elem;
+	t_carr_lst const *restrict elem;
 
 	elem = g_carriage_lst;
 	glUseProgram(g_x_shader_program);

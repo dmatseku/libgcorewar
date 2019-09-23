@@ -21,11 +21,11 @@ void	create_x(void)
 	t_mat4	matrix;
 
 	create_x_shader_program();
-	matrix = mat4_translate(vec3(1.0f - MENU_WIDTH / 2
-				- (0.25 * STRING_CHAMPION_FONTSIZE + X_DISTANCE + 0.5f * get_max_width()) / g_w_width * 2,
+	matrix = mat4_translate(vec3(1.0f - M_W / 2
+				- (0.25 * STR_CH_FS + X_D + 0.5f * get_max_width()) / g_w_width * 2,
 			g_str_champions[0]->position.y, 0.0f));
-	g_x.picture = create_picture_x(STRING_CHAMPION_FONTSIZE * 0.5);
-	create_x_vao(STRING_CHAMPION_FONTSIZE * 0.5);
+	g_x.picture = create_picture_x(STR_CH_FS * 0.5);
+	create_x_vao(STR_CH_FS * 0.5);
 	g_x.model = matrix;
 	g_x.draw = 0;
 	g_x.init = 1;

@@ -14,12 +14,12 @@ char	x_step(const double time, const char init, const char new_position)
 		start = time;
 		return (0);
 	}
-	else if (!g_x.init && (time - start) < g_step_time * X_SHOW_TIME)
+	else if (!g_x.init && (time - start) < g_step_time * X_T)
 	{
-		g_x.color.w = 1.0f - (time - start) / (g_step_time * X_SHOW_TIME);
+		g_x.color.w = 1.0f - (time - start) / (g_step_time * X_T);
 		return (0);
 	}
-	else if ((time - start) > g_step_time * X_SHOW_TIME && (time - start) < g_step_time - g_step_time * X_SHOW_TIME
+	else if ((time - start) > g_step_time * X_T && (time - start) < g_step_time - g_step_time * X_T
 					&& (g_x.color.w != 0 || g_x.position != new_position))
 	{
 		g_x.position = -new_position;
@@ -28,9 +28,9 @@ char	x_step(const double time, const char init, const char new_position)
 		g_x.color.w = 0.0f;
 		return (0);
 	}
-	else if ((time - start) > g_step_time - g_step_time * X_SHOW_TIME && (time - start) <= g_step_time)
+	else if ((time - start) > g_step_time - g_step_time * X_T && (time - start) <= g_step_time)
 	{
-		g_x.color.w = (time - start - (g_step_time - g_step_time * X_SHOW_TIME)) / (g_step_time * X_SHOW_TIME);
+		g_x.color.w = (time - start - (g_step_time - g_step_time * X_T)) / (g_step_time * X_T);
 		return (0);
 	}
 	else if ((time - start) > g_step_time)

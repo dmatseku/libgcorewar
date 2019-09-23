@@ -5,7 +5,7 @@ void	frames_draw(void)
 	char i;
 
 	i = 0;
-	while (i < FRAMES_COUNT)
+	while (i < FR_C)
 	{
 		glUseProgram(g_frame_shader_program);
 		glBindVertexArray(g_v_frame[i].vao);

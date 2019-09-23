@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar_visual_init.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/23 19:15:43 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/23 19:15:47 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 #include <libglKH.h>
 #include <keys.h>
@@ -5,7 +17,8 @@
 void	init_keys(void)
 {
 	key_handler_add(GLFW_KEY_LEFT, KEY_MONO_REPEAT, 0, 0, key_left);
-	key_handler_add(GLFW_KEY_RIGHT, KEY_MONO_REPEAT, 0, key_right_condition, key_right);
+	key_handler_add(GLFW_KEY_RIGHT, KEY_MONO_REPEAT, 0, key_right_condition,
+			key_right);
 	key_handler_add(GLFW_KEY_ESCAPE, KEY_RELEASE, 0, 0, key_escape);
 	key_handler_add(GLFW_KEY_SPACE, KEY_RELEASE, 0, 0, key_space);
 	key_handler_add(GLFW_KEY_LEFT_SHIFT, KEY_RELEASE, 0, 0, key_shift);
@@ -13,7 +26,7 @@ void	init_keys(void)
 
 char	corewar_visual_init(t_champ const **const restrict champions,
 							t_arena const *const restrict arena,
-							t_carriage * *const restrict carriages)
+							t_carriage **const restrict carriages)
 {
 	if (!glfwInit())
 		exit_error("glfw init error");
