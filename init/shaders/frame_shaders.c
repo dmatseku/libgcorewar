@@ -12,7 +12,7 @@
 
 #include <libgcorewar.h>
 
-GLchar const *const	get_frame_shader_vert(void)
+GLchar const 	*get_frame_shader_vert(void)
 {
 	return ((GLchar const *const)
 	"#version 410 core\n"
@@ -25,7 +25,7 @@ GLchar const *const	get_frame_shader_vert(void)
 	"}");
 }
 
-GLchar const *const	get_frame_shader_frag(void)
+GLchar const 	*get_frame_shader_frag(void)
 {
 	return ((GLchar const *const)
 	"#version 410 core\n"

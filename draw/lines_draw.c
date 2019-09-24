@@ -14,7 +14,7 @@
 
 void	lines_draw(void)
 {
-	char i;
+	int i;
 
 	i = 0;
 	while (i < 4 + g_number_of_champions)

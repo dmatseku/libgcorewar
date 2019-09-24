@@ -28,7 +28,7 @@ static GLfloat	*create_line_verts(const t_vec3 verts)
 	return (res);
 }
 
-void			create_line_vao(const char index, const float x, const float y,
+void			create_line_vao(const int index, const float x, const float y,
 															const int width)
 {
 	GLfloat const *restrict	verts;

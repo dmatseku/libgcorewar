@@ -19,7 +19,7 @@ static void	set_active(void)
 	i = 0;
 	while (i < g_number_of_champions)
 	{
-		g_str_champions[i]->active = 1;
+		g_str_champions[(int)i]->active = 1;
 		i++;
 	}
 }
@@ -33,7 +33,7 @@ static void	step_champions(char *const restrict nb, const double time,
 			/ g_number_of_champions));
 	while (*nb <= dnb)
 	{
-		g_str_champions[*nb]->active = 1;
+		g_str_champions[(int)*nb]->active = 1;
 		(*nb)++;
 	}
 }

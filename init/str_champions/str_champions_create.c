@@ -61,14 +61,14 @@ void			str_champions_create(t_champ const **const restrict champions)
 	y = S_2 - STR_CH_SS
 		- ((float)(STR_CH_FS) / g_w_height / 2);
 	g_number_of_champions = 0;
-	while (champions[g_number_of_champions])
+	while (champions[(int)g_number_of_champions])
 		g_number_of_champions++;
 	g_str_champions = (t_string**)malloc(
 								sizeof(t_string*) * g_number_of_champions);
 	if (!g_str_champions || !colors)
 		exit_error("str_champions malloc error");
 	i = 0;
-	while (i < g_number_of_champions)
+	while (i < (size_t)g_number_of_champions)
 	{
 		create_string(i, colors, y, champions[i]->name);
 		y -= dy;

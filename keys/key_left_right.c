@@ -17,7 +17,7 @@ void	key_left(void *args)
 {
 	char	*tmp;
 	char	str[5];
-	char	i;
+	int		i;
 
 	(void)args;
 	g_step_time += DELTA_STEP;
@@ -39,7 +39,7 @@ void	key_right(void *args)
 {
 	char	*tmp;
 	char	str[5];
-	char	i;
+	int		i;
 
 	(void)args;
 	g_step_time -= DELTA_STEP;

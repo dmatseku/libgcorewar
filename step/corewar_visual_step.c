@@ -18,7 +18,7 @@ static void	carriages_counters_update(void)
 	size_t	i;
 
 	i = 0;
-	while (i < g_number_of_champions)
+	while (i < (size_t)g_number_of_champions)
 	{
 		str = my_uitoa(g_counts[i]);
 		string_update(g_counters[i], str, g_w_width, g_w_height);

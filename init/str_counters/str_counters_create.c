@@ -15,7 +15,7 @@
 void	str_counters_create(void)
 {
 	const float	d_x = M_W / (g_number_of_champions + 1);
-	char		i;
+	int			i;
 
 	i = 0;
 	g_counters = (t_string**)malloc(sizeof(t_string*) * g_number_of_champions);

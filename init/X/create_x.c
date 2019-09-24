@@ -14,12 +14,12 @@
 
 static size_t	get_max_width(void)
 {
-	char	nb;
-	size_t	res;
+	size_t	nb;
+	int		res;
 
 	nb = 0;
 	res = 0;
-	while (nb < g_number_of_champions)
+	while (nb < (size_t)g_number_of_champions)
 	{
 		if (g_str_champions[nb]->image_width > res)
 			res = g_str_champions[nb]->image_width;

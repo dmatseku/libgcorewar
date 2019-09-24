@@ -259,9 +259,9 @@ size_t					my_strlen(char const *str);
 
 void					exit_error(char *str);
 
-GLchar const *const		get_frame_shader_vert(void);
+GLchar const			*get_frame_shader_vert(void);
 
-GLchar const *const		get_frame_shader_frag(void);
+GLchar const			*get_frame_shader_frag(void);
 
 void					create_frame_shader_program(void);
 
@@ -307,9 +307,9 @@ void					create_carriage_vao(size_t width, size_t height);
 
 void					create_x_vao(size_t width);
 
-GLchar const *const		get_x_shader_vert(void);
+GLchar const			*get_x_shader_vert(void);
 
-GLchar const *const		get_x_shader_frag(void);
+GLchar const			*get_x_shader_frag(void);
 
 void					carriages_draw(void);
 
@@ -346,7 +346,7 @@ void					step_draw(char new_position);
 
 void					str_xlogins_create(void);
 
-void					create_line_vao(char index, float x, float y,
+void					create_line_vao(int index, float x, float y,
 															int width);
 
 void					create_x(void);

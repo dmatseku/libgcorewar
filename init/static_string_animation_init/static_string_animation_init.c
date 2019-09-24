@@ -14,7 +14,7 @@
 
 static void	end(void)
 {
-	char i;
+	int i;
 
 	i = -1;
 	g_map_opacity = 1.0f;
@@ -43,7 +43,7 @@ static void	end(void)
 
 static void	set(void)
 {
-	char i;
+	int i;
 
 	i = -1;
 	g_v_frame[0].color.w = g_map_opacity;

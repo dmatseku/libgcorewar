@@ -17,7 +17,7 @@ static void	module(unsigned char const *const owner, const size_t i)
 	if (owner[i])
 		(g_str_map[i])->color = g_str_champions[owner[i] - 1]->color;
 	g_str_map[i]->draw_func = str_map_draw_function;
-	if (g_carriage_width < g_str_map[i]->image_width)
+	if ((int)g_carriage_width < g_str_map[i]->image_width)
 		g_carriage_width = g_str_map[i]->image_width;
 }
 
