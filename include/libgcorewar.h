@@ -357,6 +357,12 @@ void					carriage_list_del(t_carr_lst **lst, t_carr_lst *elem);
 
 void					carriage_list_update(t_carriage **carriages);
 
+void					create_elem(t_carriage const *carriage);
+
+void					free_carriage(t_carriage *del);
+
+void					free_first_carriage(t_carriage **elem);
+
 void					str_counters_create(void);
 
 char					x_step(double time, char init, char new_position);

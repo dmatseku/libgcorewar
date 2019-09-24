@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   other.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 15:09:59 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 15:10:01 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 
 void	my_strncat(char *const str1, char const *const str2, const size_t n)
 {
-	size_t  i;
+	size_t i;
 
 	i = 0;
 	while (i < n)
@@ -26,6 +38,7 @@ size_t	my_strlen(char const *const restrict str)
 void	my_memset(void *const array, const int symbol, size_t size)
 {
 	char *const	str = (char *const)array;
+
 	while (size--)
 		str[size] = (char)symbol;
 }
@@ -33,6 +46,7 @@ void	my_memset(void *const array, const int symbol, size_t size)
 void	my_bzero(void *const array, size_t size)
 {
 	char *const	str = (char *const)array;
+
 	while (size--)
 		str[size] = 0;
 }

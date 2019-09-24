@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_step_carriage.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 15:33:45 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 15:33:47 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 
 static void	init_carriage(void)
 {
-	t_carr_lst* elem;
+	t_carr_lst	*elem;
 
 	elem = g_carriage_lst;
 	while (elem)
@@ -18,7 +30,7 @@ static void	init_carriage(void)
 
 static void	complete_carriage(void)
 {
-	t_carr_lst* elem;
+	t_carr_lst	*elem;
 
 	elem = g_carriage_lst;
 	while (elem)
@@ -36,7 +48,7 @@ static void	complete_carriage(void)
 
 static void	step_carriage(const double start, const double time)
 {
-	t_carr_lst* elem;
+	t_carr_lst	*elem;
 
 	elem = g_carriage_lst;
 	while (elem)
@@ -44,17 +56,19 @@ static void	step_carriage(const double start, const double time)
 		if (elem->alive && elem->prev_position != elem->position)
 		{
 			elem->x = g_str_map[elem->prev_position]->position.x
-					+ ((g_str_map[elem->position]->position.x
-					- g_str_map[elem->prev_position]->position.x) / g_step_time * (time - start));
+				+ ((g_str_map[elem->position]->position.x
+				- g_str_map[elem->prev_position]->position.x) / g_step_time
+				* (time - start));
 			elem->y = g_str_map[elem->prev_position]->position.y
-					+ ((g_str_map[elem->position]->position.y
-					- g_str_map[elem->prev_position]->position.y) / g_step_time * (time - start));
+				+ ((g_str_map[elem->position]->position.y
+				- g_str_map[elem->prev_position]->position.y) / g_step_time
+				* (time - start));
 		}
 		elem = elem->next;
 	}
 }
 
-char	str_step_carriage(const char init, const double time)
+char		str_step_carriage(const char init, const double time)
 {
 	static double	start;
 
@@ -72,4 +86,3 @@ char	str_step_carriage(const char init, const double time)
 	step_carriage(start, time);
 	return (0);
 }
-

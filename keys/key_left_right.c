@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   key_left_right.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 15:01:28 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 15:01:29 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 #include <libglKH.h>
 
-void	key_left(void* args)
+void	key_left(void *args)
 {
-	char*		tmp;
-	char		str[5];
-	char		i;
+	char	*tmp;
+	char	str[5];
+	char	i;
 
 	(void)args;
 	g_step_time += DELTA_STEP;
@@ -23,11 +35,11 @@ void	key_left(void* args)
 	free(tmp);
 }
 
-void	key_right(void* args)
+void	key_right(void *args)
 {
-	char*		tmp;
-	char		str[5];
-	char		i;
+	char	*tmp;
+	char	str[5];
+	char	i;
 
 	(void)args;
 	g_step_time -= DELTA_STEP;
@@ -49,4 +61,3 @@ char	key_right_condition(void)
 {
 	return (!g_glkeys_states[GLFW_KEY_LEFT]);
 }
-

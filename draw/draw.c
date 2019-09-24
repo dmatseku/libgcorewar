@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 15:51:06 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 15:51:07 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 
 static char	call_init_funcs(char *const restrict states, const double time)
@@ -25,7 +37,25 @@ static char	call_init_funcs(char *const restrict states, const double time)
 	return (0);
 }
 
-void	draw_arena(void)
+static void	cycle_body(const double time, char *const tmp, char *func_states)
+{
+	glClearColor(0.14901960784f, 0.14901960784f, 0.14901960784f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT);
+	glfwPollEvents();
+	frames_draw();
+	if (time > 0.5f)
+	{
+		*tmp = call_init_funcs(func_states, time);
+		string_draw();
+		lines_draw();
+		x_draw();
+		if (!*tmp && !g_hidden)
+			carriages_draw();
+	}
+	glfwSwapBuffers(g_window);
+}
+
+void		draw_arena(void)
 {
 	double	time;
 	char	func_states[FU_SC];
@@ -38,21 +68,8 @@ void	draw_arena(void)
 	glfwSetTime(0);
 	while (tmp && !glfwWindowShouldClose(g_window))
 	{
-		glClearColor(0.14901960784f, 0.14901960784f, 0.14901960784f, 1.0f);
-		glClear(GL_COLOR_BUFFER_BIT/* | GL_DEPTH_BUFFER_BIT*/);
-		glfwPollEvents();
 		time = glfwGetTime();
-		frames_draw();
-		if (time > 0.5f)
-		{
-			tmp = call_init_funcs(func_states, time);
-			string_draw();
-			lines_draw();
-			x_draw();
-			if (!tmp && !g_hidden)
-				carriages_draw();
-		}
-		glfwSwapBuffers(g_window);
+		cycle_body(time, &tmp, func_states);
 	}
 	if (glfwWindowShouldClose(g_window))
 	{

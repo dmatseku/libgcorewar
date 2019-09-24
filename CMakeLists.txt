@@ -31,7 +31,9 @@ add_library(gcorewar STATIC init/corewar_visual_init.c other/other.c init/init_s
         step/update_map.c draw/step_draw.c step/str_step_carriage.c init/carriages/create_carriage.c
         other/other_3.c draw/frame_draw.c
         init/static_string_animation_init/static_string_animation_init.c init/str_xlogins/str_xlogins_create.c
-        init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/X/create_x_vao.c
-        init/X/create_x.c init/shaders/x_shaders.c init/X/create_x_shader_program.c draw/x_draw.c
+        init/lines/lines.c draw/lines_draw.c init/create_pictures/create_picture_x.c init/x/create_x_vao.c
+        init/x/create_x.c init/shaders/x_shaders.c init/x/create_x_shader_program.c draw/x_draw.c
         t_carriage_list/carriage_list_update.c t_carriage_list/carriage_list_add.c t_carriage_list/carriage_list_del.c
-        init/str_counters/str_counters_create.c step/step_x.c destroy/corewar_visual_destroy.c keys/key_left_right.c keys/keys.h keys/key_escape.c keys/key_space.c keys/key_shift.c destroy/string_animation_destroy.c draw/destroy_draw.c destroy/string_winner_animation_init.c)
+        init/str_counters/str_counters_create.c step/step_x.c destroy/corewar_visual_destroy.c keys/key_left_right.c
+        keys/key_escape.c keys/key_space.c keys/key_shift.c destroy/string_animation_destroy.c draw/destroy_draw.c
+        destroy/string_winner_animation_init.c t_carriage_list/carriage_list_update_module.c)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_champions_draw_init.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 14:33:22 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 14:33:24 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 
 static void	set_active(void)
@@ -12,20 +24,21 @@ static void	set_active(void)
 	}
 }
 
-static void step_champions(char *const restrict nb, const double time, const double start)
+static void	step_champions(char *const restrict nb, const double time,
+													const double start)
 {
 	char			dnb;
 
 	dnb = (char)((time - start) / (STR_CH_T
 			/ g_number_of_champions));
-		while (*nb <= dnb)
+	while (*nb <= dnb)
 	{
 		g_str_champions[*nb]->active = 1;
 		(*nb)++;
 	}
 }
 
-char	str_champions_draw_init(const char init, const double time)
+char		str_champions_draw_init(const char init, const double time)
 {
 	static double	start;
 	static char		nb;

@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_picture_x.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 13:19:14 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 13:19:15 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 #include <unistd.h>
 
-static void				draw_line_1(unsigned char *const restrict picture, const size_t width)
+static void				draw_line_1(unsigned char *const restrict picture,
+															const size_t width)
 {
 	size_t	i;
 
@@ -20,7 +33,8 @@ static void				draw_line_1(unsigned char *const restrict picture, const size_t w
 	}
 }
 
-static void				draw_line_2(unsigned char *const restrict picture, const size_t width)
+static void				draw_line_2(unsigned char *const restrict picture,
+															const size_t width)
 {
 	size_t i;
 	size_t j;
@@ -42,11 +56,11 @@ static void				draw_line_2(unsigned char *const restrict picture, const size_t w
 	}
 }
 
-static unsigned char*	create_picture_array(const size_t width)
+static unsigned char	*create_picture_array(const size_t width)
 {
 	unsigned char *restrict	picture;
 
-	if (!(picture = (unsigned char*)malloc(sizeof(unsigned char) * width * width * 4)))
+	if (!(picture = (uint8_t*)malloc(sizeof(uint8_t) * width * width * 4)))
 		exit_error("create_picture malloc error");
 	my_memset(picture, 0, sizeof(unsigned char) * width * width * 4);
 	draw_line_1(picture, width);
@@ -54,7 +68,7 @@ static unsigned char*	create_picture_array(const size_t width)
 	return (picture);
 }
 
-GLuint	create_picture_x(const size_t width)
+GLuint					create_picture_x(const size_t width)
 {
 	unsigned char const *restrict	picture;
 	GLuint							texture;
@@ -66,9 +80,11 @@ GLuint	create_picture_x(const size_t width)
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_BORDER);
 	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, border_color);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,
+												GL_NEAREST_MIPMAP_NEAREST);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, width, 0, GL_RGBA, GL_UNSIGNED_BYTE, picture);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, width, 0, GL_RGBA,
+												GL_UNSIGNED_BYTE, picture);
 	glGenerateMipmap(GL_TEXTURE_2D);
 	free((void*)picture);
 	glBindTexture(GL_TEXTURE_2D, 0);

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   lines.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 13:50:26 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 13:50:28 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 
-static GLfloat* create_line_verts(const t_vec3 verts)
+static GLfloat	*create_line_verts(const t_vec3 verts)
 {
 	GLfloat *const restrict res = (GLfloat*)malloc(sizeof(GLfloat) * 4);
 
@@ -16,7 +28,8 @@ static GLfloat* create_line_verts(const t_vec3 verts)
 	return (res);
 }
 
-void	create_line_vao(const char index, const float x, const float y, const int width)
+void			create_line_vao(const char index, const float x, const float y,
+															const int width)
 {
 	GLfloat const *restrict	verts;
 	t_vec3					coords;
@@ -30,7 +43,7 @@ void	create_line_vao(const char index, const float x, const float y, const int w
 	glBindVertexArray(g_lines[index].vao);
 	glBindBuffer(GL_ARRAY_BUFFER, g_lines[index].vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 4, verts, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), (GLvoid*)0);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 2 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
 	glBindVertexArray(0);
 	free((void*)verts);

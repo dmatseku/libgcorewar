@@ -1,55 +1,57 @@
-#include <libgcorewar.h>
-#include <libmatrix.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_carriage_vao.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 12:55:57 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 12:55:59 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-static void create_carriage_verts(GLfloat *const restrict res, const int height, const int width)
+#include <libgcorewar.h>
+
+static void		set_verts(t_vec4 *vecs, const int height,
+					const int width, const t_mat4 proj)
 {
-//	const float x = -((float)width - 1) / (float)g_w_width + 2.0f / (float)g_w_width / 4;
-//	const float y = -((float)height - 1) / (float)g_w_height + 2.0f / (float)g_w_height / 4;
-//	const float x1 = ((float)width + 1) / (float)g_w_width - 2.0f / (float)g_w_width / 4;
-//	const float y1 = ((float)height + 1) / (float)g_w_height - 2.0f / (float)g_w_height / 4;
-	t_vec4					left_top;
-	t_vec4					left_bottom;
-	t_vec4					right_top;
-	t_vec4					right_bottom;
-	t_mat4					proj;
+	vecs[0] = mat_vec_4_mult(proj, vec4(
+			-(width / 2), height / 2 + height % 2, 1.0f, 1.0f));
+	vecs[1] = mat_vec_4_mult(proj, vec4(
+			-(width / 2), -(height / 2), 1.0f, 1.0f));
+	vecs[2] = mat_vec_4_mult(proj, vec4(
+			width / 2 + width % 2, height / 2 + height % 2, 1.0f, 1.0f));
+	vecs[3] = mat_vec_4_mult(proj, vec4(
+			width / 2 + width % 2, -(height / 2), 1.0f, 1.0f));
+}
+
+static void		create_carriage_verts(GLfloat *const restrict res,
+			const int height, const int width, const t_mat4 proj)
+{
+	t_vec4	vecs[4];
 
 	if (!res)
 		exit_error("malloc error");
-
-	proj = mat4_orthographic(-(g_w_width / 2), g_w_width / 2 + g_w_width % 2, -(g_w_height / 2),
-							 g_w_height / 2 + g_w_height % 2, 0.001f, 100.0f);
-
-	left_top = mat_vec_4_mult(proj, vec4
-	(-(width / 2), height / 2 + height % 2, 1.0f, 1.0f));
-
-	left_bottom = mat_vec_4_mult(proj, vec4
-	(-(width / 2), -(height / 2), 1.0f, 1.0f));
-
-	right_top = mat_vec_4_mult(proj, vec4
-	(width / 2 + width % 2, height / 2 + height % 2, 1.0f, 1.0f));
-
-	right_bottom = mat_vec_4_mult(proj, vec4
-	(width / 2 + width % 2, -(height / 2), 1.0f, 1.0f));
-
-	res[0] = left_bottom.x;
-	res[1] = left_bottom.y;
+	set_verts(vecs, height, width, proj);
+	res[0] = vecs[1].x;
+	res[1] = vecs[1].y;
 	res[2] = 0.0f;
 	res[3] = 1.0f;
-	res[4] = left_top.x;
-	res[5] = left_top.y;
+	res[4] = vecs[0].x;
+	res[5] = vecs[0].y;
 	res[6] = 0.0f;
 	res[7] = 0.0f;
-	res[8] = right_bottom.x;
-	res[9] = right_bottom.y;
+	res[8] = vecs[3].x;
+	res[9] = vecs[3].y;
 	res[10] = 1.0f;
 	res[11] = 1.0f;
-	res[12] = right_top.x;
-	res[13] = right_top.y;
+	res[12] = vecs[2].x;
+	res[13] = vecs[2].y;
 	res[14] = 1.0f;
 	res[15] = 0.0f;
 }
 
-static GLuint* create_carriage_indices(void)
+static GLuint	*create_carriage_indices(void)
 {
 	GLuint *const restrict res = (GLuint*)malloc(sizeof(GLuint) * 6);
 
@@ -67,12 +69,14 @@ static GLuint* create_carriage_indices(void)
 	return (res);
 }
 
-void	create_carriage_vao(const size_t width, const size_t height)
+void			create_carriage_vao(const size_t width, const size_t height)
 {
-	GLfloat *const restrict			verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
-	GLuint const *const restrict	indices = create_carriage_indices();
+	GLfloat *const restrict	verts = (GLfloat*)malloc(sizeof(GLfloat) * 16);
+	GLuint *const restrict	indices = create_carriage_indices();
 
-	create_carriage_verts(verts, height, width);
+	create_carriage_verts(verts, height, width, mat4_orthographic(
+			-(g_w_width / 2), g_w_width / 2 + g_w_width % 2, -(g_w_height / 2),
+			g_w_height / 2 + g_w_height % 2, 0.001f, 100.0f));
 	glGenVertexArrays(1, &(g_v_carriage.vao));
 	glGenBuffers(1, &(g_v_carriage.vbo));
 	glGenBuffers(1, &(g_v_carriage.ebo));
@@ -80,13 +84,14 @@ void	create_carriage_vao(const size_t width, const size_t height)
 	glBindBuffer(GL_ARRAY_BUFFER, g_v_carriage.vbo);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 16, verts, GL_STATIC_DRAW);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, g_v_carriage.ebo);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices, GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)0);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(GLuint) * 6, indices,
+														GL_STATIC_DRAW);
+	glVertexAttribPointer(0, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), 0);
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat), (GLvoid*)(2 * sizeof(GLfloat)));
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 4 * sizeof(GLfloat),
+											(GLvoid*)(2 * sizeof(GLfloat)));
 	glEnableVertexAttribArray(1);
 	glBindVertexArray(0);
 	free(verts);
 	free((void*)indices);
 }
-

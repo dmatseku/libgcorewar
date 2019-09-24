@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   create_frame_shader_program.c                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dmatseku <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/09/24 13:21:34 by dmatseku          #+#    #+#             */
+/*   Updated: 2019/09/24 13:21:35 by dmatseku         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <libgcorewar.h>
 #include <unistd.h>
 
@@ -8,7 +20,7 @@ static GLuint	create_frame_shader_vertex(void)
 	const GLuint		vshader = glCreateShader(GL_VERTEX_SHADER);
 	GLchar const *const	v_shader_str = get_frame_shader_vert();
 
-	glShaderSource(vshader, 1, &v_shader_str , 0);
+	glShaderSource(vshader, 1, &v_shader_str, 0);
 	glCompileShader(vshader);
 	glGetShaderiv(vshader, GL_COMPILE_STATUS, &success);
 	if (!success)
@@ -33,12 +45,11 @@ static GLuint	create_frame_shader_fragment(void)
 	{
 		glGetShaderInfoLog(fshader, 512, NULL, log);
 		exit_error(log);
-		return(0);
 	}
 	return (fshader);
 }
 
-void	create_frame_shader_program(void)
+void			create_frame_shader_program(void)
 {
 	const GLuint		vshader = create_frame_shader_vertex();
 	const GLuint		fshader = create_frame_shader_fragment();
